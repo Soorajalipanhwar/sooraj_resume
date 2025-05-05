@@ -191,16 +191,26 @@ const About: React.FC = () => {
                 {educationData.map((item, idx) => (
                   <Fade in={visibleItems[idx]} timeout={700} key={item.label}>
                     <li
-                      ref={(el) => (itemRefs.current[idx] = el)}
-                      onMouseEnter={() => setHoveredImage(item.hoverImage)} // Set hover image
-                      onMouseLeave={() => setHoveredImage(null)} // Clear hover image
+                      ref={(el) => {
+                        itemRefs.current[idx] = el; // Assign the element to the ref array
+                      }}
                       style={{
                         position: "relative",
-                        minHeight: ITEM_HEIGHT,
+                        minHeight:
+                          typeof ITEM_HEIGHT === "number"
+                            ? ITEM_HEIGHT
+                            : undefined,
                         display: "flex",
                         alignItems: "flex-start",
-                        marginBottom: idx === educationData.length - 1 ? 0 : 20,
+                        marginBottom:
+                          idx === educationData.length - 1
+                            ? 0
+                            : window.innerWidth < 900
+                            ? 40
+                            : 20,
                       }}
+                      onMouseEnter={() => setHoveredImage(item.hoverImage)} // Set hover image
+                      onMouseLeave={() => setHoveredImage(null)} // Clear hover image
                     >
                       {/* Dot */}
                       <Box
