@@ -250,30 +250,25 @@ const SkillsSection: React.FC = () => {
         {skills.map((skill) => (
           <Grid item xs={12} sm={6} md={4} key={skill.category}>
             <Paper
-              elevation={4}
+              elevation={0}
               sx={{
-                p: 2,
-                borderRadius: 4,
-                background: isDark
-                  ? "linear-gradient(135deg, #2a2a3b, #1e1e2f)"
-                  : "linear-gradient(135deg, #ffffff, #f5f5f5)",
+                position: "relative",
+                p: 0,
+                borderRadius: 0,
+                background: "transparent", // Fully transparent background
                 textAlign: "center",
                 width: 180,
-                overflow: "hidden",
-                position: "relative",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                  boxShadow: "0px 8px 30px rgba(0, 0, 0, 0.2)",
-                  "& .drawer": {
-                    maxHeight: 300,
-                    opacity: 1,
-                    paddingTop: 2,
-                  },
+                height: 120,
+                overflow: "visible",
+                boxShadow: "none", // No shadow
+                "&:hover .drawer": {
+                  opacity: 1,
+                  transform: "translateY(0)",
+                  pointerEvents: "auto",
                 },
               }}
             >
-              {/* Icon */}
+              {/* Skill Icon */}
               <Box
                 sx={{
                   display: "flex",
@@ -285,36 +280,37 @@ const SkillsSection: React.FC = () => {
                 {skill.icon}
               </Box>
 
-              {/* Category Title */}
+              {/* Category Text */}
               <Typography
                 variant="subtitle1"
                 fontWeight={600}
                 sx={{
                   color: isDark ? "#ffffff" : "#333333",
-                  fontSize:
-                    skill.category === "Programming Languages"
-                      ? "0.9rem"
-                      : "1rem", // Smaller font size for "Programming Languages"
-                  lineHeight:
-                    skill.category === "Programming Languages" ? "1.2" : "1.5", // Adjust line height for consistency
-                  textAlign: "center",
                 }}
               >
                 {skill.category}
               </Typography>
 
-              {/* Hidden Skill Drawer */}
+              {/* Drawer */}
               <Box
                 className="drawer"
                 sx={{
-                  mt: 1,
-                  maxHeight: 0,
-                  overflow: "hidden",
+                  position: "absolute",
+                  top: "100%",
+                  left: 0,
+                  width: "100%",
+                  background: "transparent", // 🔥 Fully transparent
+                  borderRadius: "0 0 16px 16px",
+                  boxShadow: "none", // No shadow
+                  zIndex: 10,
                   opacity: 0,
-                  transition: "all 0.4s ease",
+                  pointerEvents: "none",
+                  transform: "translateY(-10px)",
+                  transition: "all 0.3s ease",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
+                  py: 2,
                   gap: 1,
                 }}
               >
@@ -330,7 +326,7 @@ const SkillsSection: React.FC = () => {
                       background: isDark
                         ? "rgba(255, 255, 255, 0.1)"
                         : "rgba(0, 0, 0, 0.05)",
-                      width: "100%",
+                      width: "90%",
                       justifyContent: "center",
                     }}
                   >
