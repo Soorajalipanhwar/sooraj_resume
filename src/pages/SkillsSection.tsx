@@ -45,7 +45,7 @@ const SkillsSection: React.FC = () => {
   return (
     <Box
       sx={{
-        minHeight: "100vh", // Full screen height
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -58,7 +58,7 @@ const SkillsSection: React.FC = () => {
       }}
     >
       <Typography
-        variant="h3"
+        variant="h6" // Smaller header for the section
         fontWeight={700}
         gutterBottom
         sx={{
@@ -68,13 +68,13 @@ const SkillsSection: React.FC = () => {
       >
         Skills & Tech Stack
       </Typography>
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         {skills.map((skill) => (
           <Grid item xs={12} sm={6} md={4} key={skill.category}>
             <Paper
-              elevation={6}
+              elevation={3}
               sx={{
-                p: 4,
+                p: 1.5, // Further reduced padding
                 borderRadius: 4,
                 background: isDark
                   ? "linear-gradient(135deg, #2a2a3b, #1e1e2f)"
@@ -84,7 +84,10 @@ const SkillsSection: React.FC = () => {
                 flexDirection: "column",
                 justifyContent: "space-between",
                 alignItems: "center",
-                height: 300, // Fixed height for uniform cards
+                width: 200, // Smaller width
+                height: 250, // Smaller height
+                overflow: "hidden", // Prevent content overflow
+                position: "relative",
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.05)",
@@ -99,18 +102,21 @@ const SkillsSection: React.FC = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  mb: 2,
+                  mb: 1, // Reduced margin
                 }}
               >
                 {skill.icon}
               </Box>
               {/* Category Title */}
               <Typography
-                variant="h5"
+                variant="subtitle2" // Smaller font size for the title
                 fontWeight={600}
                 gutterBottom
                 sx={{
                   color: isDark ? "#ffffff" : "#333333",
+                  textAlign: "center",
+                  wordWrap: "break-word",
+                  whiteSpace: "normal",
                 }}
               >
                 {skill.category}
@@ -121,13 +127,13 @@ const SkillsSection: React.FC = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: 1,
+                  gap: 0.3, // Reduced gap between items
                 }}
               >
                 {skill.items.map((item) => (
                   <Typography
                     key={item}
-                    variant="body1"
+                    variant="caption" // Smaller font size for skill items
                     sx={{
                       color: isDark ? "#bdbdbd" : "#555555",
                     }}
