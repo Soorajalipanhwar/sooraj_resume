@@ -258,21 +258,20 @@ const SkillsSection: React.FC = () => {
                   ? "linear-gradient(135deg, #2a2a3b, #1e1e2f)"
                   : "linear-gradient(135deg, #ffffff, #f5f5f5)",
                 textAlign: "center",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: 240,
-                height: 360,
+                width: 180,
                 overflow: "hidden",
                 position: "relative",
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.05)",
                   boxShadow: "0px 8px 30px rgba(0, 0, 0, 0.2)",
+                  "& .drawer": {
+                    maxHeight: 300,
+                    opacity: 1,
+                    paddingTop: 2,
+                  },
                 },
               }}
-              aria-label={`Skill category: ${skill.category}`}
             >
               {/* Icon */}
               <Box
@@ -280,28 +279,39 @@ const SkillsSection: React.FC = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  mb: 2,
+                  mb: 1,
                 }}
               >
                 {skill.icon}
               </Box>
+
               {/* Category Title */}
               <Typography
                 variant="subtitle1"
                 fontWeight={600}
-                gutterBottom
                 sx={{
                   color: isDark ? "#ffffff" : "#333333",
+                  fontSize:
+                    skill.category === "Programming Languages"
+                      ? "0.9rem"
+                      : "1rem", // Smaller font size for "Programming Languages"
+                  lineHeight:
+                    skill.category === "Programming Languages" ? "1.2" : "1.5", // Adjust line height for consistency
                   textAlign: "center",
-                  wordWrap: "break-word",
-                  whiteSpace: "normal",
                 }}
               >
                 {skill.category}
               </Typography>
-              {/* Skill Items */}
+
+              {/* Hidden Skill Drawer */}
               <Box
+                className="drawer"
                 sx={{
+                  mt: 1,
+                  maxHeight: 0,
+                  overflow: "hidden",
+                  opacity: 0,
+                  transition: "all 0.4s ease",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
