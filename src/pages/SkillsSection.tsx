@@ -1,0 +1,147 @@
+import React from "react";
+import { Box, Typography, Grid, Paper, useTheme } from "@mui/material";
+import CodeIcon from "@mui/icons-material/Code";
+import StorageIcon from "@mui/icons-material/Storage";
+import BuildIcon from "@mui/icons-material/Build";
+import DataUsageIcon from "@mui/icons-material/DataUsage";
+
+const skills = [
+  {
+    category: "Frontend",
+    items: ["JavaScript", "C#", "React", "TypeScript", "Material-UI"],
+    icon: <CodeIcon fontSize="large" sx={{ color: "#1976d2" }} />,
+  },
+  {
+    category: "Backend",
+    items: [".NET Framework", ".NET Core", "Node.js", "Express", "PHP"],
+    icon: <BuildIcon fontSize="large" sx={{ color: "#388e3c" }} />,
+  },
+  {
+    category: "Database",
+    items: ["SQL Server", "MongoDB", "MySQL"],
+    icon: <StorageIcon fontSize="large" sx={{ color: "#f57c00" }} />,
+  },
+  {
+    category: "Programming Languages",
+    items: ["C#", "Python", "JavaScript", "PHP"],
+    icon: <CodeIcon fontSize="large" sx={{ color: "#d32f2f" }} />,
+  },
+  {
+    category: "Data Science",
+    items: ["Pandas", "NumPy", "Matplotlib", "Scikit-learn"],
+    icon: <DataUsageIcon fontSize="large" sx={{ color: "#7b1fa2" }} />,
+  },
+  {
+    category: "Tools",
+    items: ["Git", "Webpack", "Vite", "Visual Studio", "Azure DevOps"],
+    icon: <BuildIcon fontSize="large" sx={{ color: "#0288d1" }} />,
+  },
+];
+
+const SkillsSection: React.FC = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh", // Full screen height
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        px: 4,
+        py: 6,
+        background: isDark
+          ? "linear-gradient(135deg, #1e1e2f, #121212)"
+          : "linear-gradient(135deg, #f5f5f5, #ffffff)",
+      }}
+    >
+      <Typography
+        variant="h3"
+        fontWeight={700}
+        gutterBottom
+        sx={{
+          color: isDark ? "#ffffff" : "#333333",
+          textShadow: isDark ? "0px 2px 4px rgba(0,0,0,0.6)" : "none",
+        }}
+      >
+        Skills & Tech Stack
+      </Typography>
+      <Grid container spacing={4}>
+        {skills.map((skill) => (
+          <Grid item xs={12} sm={6} md={4} key={skill.category}>
+            <Paper
+              elevation={6}
+              sx={{
+                p: 4,
+                borderRadius: 4,
+                background: isDark
+                  ? "linear-gradient(135deg, #2a2a3b, #1e1e2f)"
+                  : "linear-gradient(135deg, #ffffff, #f5f5f5)",
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "center",
+                height: 300, // Fixed height for uniform cards
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: "0px 8px 30px rgba(0, 0, 0, 0.2)",
+                },
+              }}
+              aria-label={`Skill category: ${skill.category}`}
+            >
+              {/* Icon */}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  mb: 2,
+                }}
+              >
+                {skill.icon}
+              </Box>
+              {/* Category Title */}
+              <Typography
+                variant="h5"
+                fontWeight={600}
+                gutterBottom
+                sx={{
+                  color: isDark ? "#ffffff" : "#333333",
+                }}
+              >
+                {skill.category}
+              </Typography>
+              {/* Skill Items */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                {skill.items.map((item) => (
+                  <Typography
+                    key={item}
+                    variant="body1"
+                    sx={{
+                      color: isDark ? "#bdbdbd" : "#555555",
+                    }}
+                  >
+                    {item}
+                  </Typography>
+                ))}
+              </Box>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
+};
+
+export default SkillsSection;

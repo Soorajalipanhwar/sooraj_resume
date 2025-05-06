@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Box, Typography, Paper, useTheme, Avatar, Fade } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
+import SkillsSection from "./SkillsSection";
 
 const educationData = [
   {
@@ -80,247 +81,251 @@ const About: React.FC = () => {
   }, [visibleItems]);
 
   return (
-    <section id="about">
-      <Box
-        sx={{
-          width: "100%",
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          px: 2,
-          py: { xs: 6, md: 10 },
-          opacity: visible ? 1 : 0,
-          transform: visible ? "none" : "translateY(40px)",
-          transition:
-            "opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)",
-        }}
-      >
-        <Fade in={visible} timeout={1000}>
-          <Paper
-            elevation={10}
-            sx={{
-              maxWidth: 1100,
-              width: "100%",
-              minHeight: { xs: "90vh", md: "60vh" }, // Fixed height for mobile view
-              p: { xs: 3, sm: 4, md: 4 }, // Increased padding for mobile
-              borderRadius: 6,
-              background: isDark
-                ? "rgba(30, 30, 40, 0.92)"
-                : "rgba(255,255,255,0.98)",
-              boxShadow: isDark
-                ? "0 8px 32px 0 rgba(0,0,0,0.7)"
-                : "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
-              backdropFilter: "blur(8px)",
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              gap: { xs: 3, md: 4 }, // Increased gap for mobile
-              alignItems: "flex-start",
-              justifyContent: "space-between",
-              transition:
-                "box-shadow 0.4s cubic-bezier(.4,0,.2,1), background 0.4s cubic-bezier(.4,0,.2,1)",
-              "&:hover": {
-                boxShadow: "0 12px 48px 0 #1976d2aa",
-              },
-            }}
-          >
-            {/* Left Column: Timeline */}
-            <Box
+    <>
+      <section id="about">
+        <Box
+          sx={{
+            width: "100%",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            px: 2,
+            py: { xs: 6, md: 10 },
+            opacity: visible ? 1 : 0,
+            transform: visible ? "none" : "translateY(40px)",
+            transition:
+              "opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)",
+          }}
+        >
+          <Fade in={visible} timeout={1000}>
+            <Paper
+              elevation={10}
               sx={{
-                flex: 1,
+                maxWidth: 1100,
+                width: "100%",
+                minHeight: { xs: "90vh", md: "60vh" }, // Fixed height for mobile view
+                p: { xs: 3, sm: 4, md: 4 }, // Increased padding for mobile
+                borderRadius: 6,
+                background: isDark
+                  ? "rgba(30, 30, 40, 0.92)"
+                  : "rgba(255,255,255,0.98)",
+                boxShadow: isDark
+                  ? "0 8px 32px 0 rgba(0,0,0,0.7)"
+                  : "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+                backdropFilter: "blur(8px)",
                 display: "flex",
-                flexDirection: "column",
-                alignItems: { xs: "center", md: "flex-start" },
-                justifyContent: "center",
-                pr: { xs: 0, md: 2 },
-                textAlign: { xs: "center", md: "left" },
+                flexDirection: { xs: "column", md: "row" },
+                gap: { xs: 3, md: 4 }, // Increased gap for mobile
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                transition:
+                  "box-shadow 0.4s cubic-bezier(.4,0,.2,1), background 0.4s cubic-bezier(.4,0,.2,1)",
+                "&:hover": {
+                  boxShadow: "0 12px 48px 0 #1976d2aa",
+                },
               }}
             >
-              {/* School Icon Above the Timeline */}
+              {/* Left Column: Timeline */}
               <Box
                 sx={{
+                  flex: 1,
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
-                  mb: 2,
+                  alignItems: { xs: "center", md: "flex-start" },
+                  justifyContent: "center",
+                  pr: { xs: 0, md: 2 },
+                  textAlign: { xs: "center", md: "left" },
                 }}
               >
-                <SchoolIcon
-                  color="primary"
+                {/* School Icon Above the Timeline */}
+                <Box
                   sx={{
-                    fontSize: 48,
-                    mb: 1,
-                  }}
-                />
-                <Typography
-                  variant="h4"
-                  fontWeight={800}
-                  sx={{
-                    color: theme.palette.primary.main,
-                    letterSpacing: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    mb: 2,
                   }}
                 >
-                  My Education
-                </Typography>
-              </Box>
+                  <SchoolIcon
+                    color="primary"
+                    sx={{
+                      fontSize: 48,
+                      mb: 1,
+                    }}
+                  />
+                  <Typography
+                    variant="h4"
+                    fontWeight={800}
+                    sx={{
+                      color: theme.palette.primary.main,
+                      letterSpacing: 1,
+                    }}
+                  >
+                    My Education
+                  </Typography>
+                </Box>
 
-              {/* Timeline */}
-              <Box
-                component="ul"
-                sx={{
-                  listStyle: "none",
-                  p: 0,
-                  m: 0,
-                  position: "relative",
-                  width: "100%",
-                }}
-              >
-                {/* Vertical line */}
+                {/* Timeline */}
                 <Box
+                  component="ul"
                   sx={{
-                    position: "absolute",
-                    left: { xs: 20, md: 20 },
-                    top: 0,
-                    width: 4,
-                    height: `calc(100% - 40px)`,
-                    bgcolor: theme.palette.primary.light,
-                    opacity: 0.2,
-                    zIndex: 0,
+                    listStyle: "none",
+                    p: 0,
+                    m: 0,
+                    position: "relative",
+                    width: "100%",
                   }}
-                />
-                {educationData.map((item, idx) => (
-                  <Fade in={visibleItems[idx]} timeout={700} key={item.label}>
-                    <li
-                      ref={(el) => {
-                        itemRefs.current[idx] = el; // Assign the element to the ref array
-                      }}
-                      style={{
-                        position: "relative",
-                        minHeight:
-                          typeof ITEM_HEIGHT === "number"
-                            ? ITEM_HEIGHT
-                            : undefined,
-                        display: "flex",
-                        alignItems: "flex-start",
-                        marginBottom:
-                          idx === educationData.length - 1
-                            ? 0
-                            : window.innerWidth < 900
-                            ? 40
-                            : 20,
-                      }}
-                      onMouseEnter={() => setHoveredImage(item.hoverImage)} // Set hover image
-                      onMouseLeave={() => setHoveredImage(null)} // Clear hover image
-                    >
-                      {/* Dot */}
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          left: { xs: 8, md: 8 },
-                          top: 40,
-                          width: 24,
-                          height: 24,
-                          borderRadius: "50%",
-                          bgcolor: "#fff",
-                          border: `4px solid ${theme.palette.primary.main}`,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          zIndex: 2,
-                          boxShadow: 2,
+                >
+                  {/* Vertical line */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      left: { xs: 20, md: 20 },
+                      top: 0,
+                      width: 4,
+                      height: `calc(100% - 40px)`,
+                      bgcolor: theme.palette.primary.light,
+                      opacity: 0.2,
+                      zIndex: 0,
+                    }}
+                  />
+                  {educationData.map((item, idx) => (
+                    <Fade in={visibleItems[idx]} timeout={700} key={item.label}>
+                      <li
+                        ref={(el) => {
+                          itemRefs.current[idx] = el; // Assign the element to the ref array
                         }}
-                      >
-                        {item.icon}
-                      </Box>
-                      {/* Card Content */}
-                      <Box
-                        sx={{
-                          ml: { xs: 8, md: 8 },
-                          flex: 1,
-                          background: isDark
-                            ? "rgba(30, 30, 40, 0.92)"
-                            : "rgba(255,255,255,0.98)",
-                          borderRadius: 3,
-                          boxShadow: isDark
-                            ? "0 2px 8px 0 rgba(25, 118, 210, 0.10)"
-                            : "0 2px 8px 0 rgba(33, 150, 243, 0.07)",
-                          p: 2,
+                        style={{
+                          position: "relative",
+                          minHeight:
+                            typeof ITEM_HEIGHT === "number"
+                              ? ITEM_HEIGHT
+                              : undefined,
                           display: "flex",
-                          alignItems: "center",
-                          minHeight: 100,
-                          transition: "box-shadow 0.4s cubic-bezier(.4,0,.2,1)",
-                          "&:hover": {
-                            boxShadow: "0 8px 32px 0 #1976d2aa",
-                          },
+                          alignItems: "flex-start",
+                          marginBottom:
+                            idx === educationData.length - 1
+                              ? 0
+                              : window.innerWidth < 900
+                              ? 40
+                              : 20,
                         }}
+                        onMouseEnter={() => setHoveredImage(item.hoverImage)} // Set hover image
+                        onMouseLeave={() => setHoveredImage(null)} // Clear hover image
                       >
-                        <Avatar
-                          src={item.timelineImage}
-                          alt={item.label}
-                          sx={{
-                            width: 72,
-                            height: 72,
-                            mr: 2,
-                            border: `2px solid ${theme.palette.primary.main}`,
-                            boxShadow: 1,
-                            background: "#fff",
-                          }}
-                          variant="rounded"
-                        />
+                        {/* Dot */}
                         <Box
                           sx={{
-                            textAlign: { xs: "justify", md: "left" }, // Justify text on mobile
+                            position: "absolute",
+                            left: { xs: 8, md: 8 },
+                            top: 40,
+                            width: 24,
+                            height: 24,
+                            borderRadius: "50%",
+                            bgcolor: "#fff",
+                            border: `4px solid ${theme.palette.primary.main}`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            zIndex: 2,
+                            boxShadow: 2,
                           }}
                         >
-                          <Typography variant="h6" fontWeight={700}>
-                            {item.label}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            fontWeight={700}
-                            gutterBottom
-                          >
-                            {item.year} — {item.institution}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {item.details}
-                          </Typography>
+                          {item.icon}
                         </Box>
-                      </Box>
-                    </li>
-                  </Fade>
-                ))}
+                        {/* Card Content */}
+                        <Box
+                          sx={{
+                            ml: { xs: 8, md: 8 },
+                            flex: 1,
+                            background: isDark
+                              ? "rgba(30, 30, 40, 0.92)"
+                              : "rgba(255,255,255,0.98)",
+                            borderRadius: 3,
+                            boxShadow: isDark
+                              ? "0 2px 8px 0 rgba(25, 118, 210, 0.10)"
+                              : "0 2px 8px 0 rgba(33, 150, 243, 0.07)",
+                            p: 2,
+                            display: "flex",
+                            alignItems: "center",
+                            minHeight: 100,
+                            transition:
+                              "box-shadow 0.4s cubic-bezier(.4,0,.2,1)",
+                            "&:hover": {
+                              boxShadow: "0 8px 32px 0 #1976d2aa",
+                            },
+                          }}
+                        >
+                          <Avatar
+                            src={item.timelineImage}
+                            alt={item.label}
+                            sx={{
+                              width: 72,
+                              height: 72,
+                              mr: 2,
+                              border: `2px solid ${theme.palette.primary.main}`,
+                              boxShadow: 1,
+                              background: "#fff",
+                            }}
+                            variant="rounded"
+                          />
+                          <Box
+                            sx={{
+                              textAlign: { xs: "justify", md: "left" }, // Justify text on mobile
+                            }}
+                          >
+                            <Typography variant="h6" fontWeight={700}>
+                              {item.label}
+                            </Typography>
+                            <Typography
+                              variant="body2"
+                              color="text.secondary"
+                              fontWeight={700}
+                              gutterBottom
+                            >
+                              {item.year} — {item.institution}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {item.details}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </li>
+                    </Fade>
+                  ))}
+                </Box>
               </Box>
-            </Box>
 
-            {/* Right Column: Hovered Image */}
-            <Box
-              sx={{
-                flex: 1,
-                display: { xs: "none", md: "flex" },
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {hoveredImage && (
-                <Box
-                  component="img"
-                  src={hoveredImage}
-                  alt="Hovered Education"
-                  sx={{
-                    maxWidth: "100%",
-                    maxHeight: "300px",
-                    borderRadius: 4,
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
-                  }}
-                />
-              )}
-            </Box>
-          </Paper>
-        </Fade>
-      </Box>
-    </section>
+              {/* Right Column: Hovered Image */}
+              <Box
+                sx={{
+                  flex: 1,
+                  display: { xs: "none", md: "flex" },
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {hoveredImage && (
+                  <Box
+                    component="img"
+                    src={hoveredImage}
+                    alt="Hovered Education"
+                    sx={{
+                      maxWidth: "100%",
+                      maxHeight: "300px",
+                      borderRadius: 4,
+                      boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+                    }}
+                  />
+                )}
+              </Box>
+            </Paper>
+          </Fade>
+        </Box>
+      </section>
+      <SkillsSection />
+    </>
   );
 };
 
