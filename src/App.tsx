@@ -16,6 +16,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ThemeToggle from "./components/ThemeToggle";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import PortfolioSection from "./pages/Portfolio"; // Import PortfolioSection
+import Contact from "./pages/Contact"; // Import Contact
 import { useThemeContext } from "./contexts/ThemeContext";
 
 const navLinks = [
@@ -123,7 +125,8 @@ const App: React.FC = () => {
       {/* MAIN CONTENT */}
       <Home />
       <About />
-      {/* <Portfolio /> */}
+      <PortfolioSection /> {/* Render PortfolioSection */}
+      <Contact />
       {/* <Contact /> */}
     </Box>
   );
