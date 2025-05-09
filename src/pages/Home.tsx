@@ -17,48 +17,74 @@ const imageUrl = "https://soorajalipanhwar.github.io/My-Website/assets/new.png";
 const cvUrl =
   "https://soorajalipanhwar.github.io/My-Website/assets/Sooraj's%20CV.pdf";
 
-const TITLES = [
-  "Software Developer",
-  "Web Developer",
-  "Programmer",
-  "Software Engineer",
-];
+const TITLES = ["{Software Developer", "<Web Developer", "Software Engineer"];
 
 const Typewriter: React.FC = () => {
-  const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [deleting, setDeleting] = useState(false);
-  const [blink, setBlink] = useState(true);
+  const [index, setIndex] = React.useState(0);
+  const [subIndex, setSubIndex] = React.useState(0);
+  const [deleting, setDeleting] = React.useState(false);
+  const [blink, setBlink] = React.useState(true);
 
-  useEffect(() => {
+  const isWebDev = TITLES[index].replace(/[<>{}]/g, "") === "Web Developer";
+  const isSoftDev =
+    TITLES[index].replace(/[<>{}]/g, "") === "Software Developer";
+
+  React.useEffect(() => {
     if (subIndex === TITLES[index].length + 1 && !deleting) {
       setTimeout(() => setDeleting(true), 1000);
       return;
     }
+
     if (subIndex === 0 && deleting) {
       setDeleting(false);
       setIndex((prev) => (prev + 1) % TITLES.length);
       return;
     }
+
     const timeout = setTimeout(
       () => {
         setSubIndex((prev) => (deleting ? prev - 1 : prev + 1));
       },
       deleting ? 40 : 100
     );
+
     return () => clearTimeout(timeout);
   }, [subIndex, deleting, index]);
 
-  useEffect(() => {
-    const blinkTimeout = setInterval(() => {
-      setBlink((v) => !v);
+  React.useEffect(() => {
+    const blinkInterval = setInterval(() => {
+      setBlink((prev) => !prev);
     }, 500);
-    return () => clearInterval(blinkTimeout);
+    return () => clearInterval(blinkInterval);
   }, []);
+
+  const typedText = TITLES[index].substring(0, subIndex).replace(/[<>{}]/g, "");
 
   return (
     <span>
-      {TITLES[index].substring(0, subIndex)}
+      {/* Opening Brackets */}
+      {isWebDev && subIndex > 0 && (
+        <span style={{ color: "orange" }}>&lt;</span>
+      )}
+      {isSoftDev && subIndex > 0 && (
+        <span style={{ color: "#00bfa6" }}>&#123;</span> // {
+      )}
+
+      {/* Typed Text */}
+      {typedText}
+
+      {/* Closing Brackets */}
+      {isWebDev && subIndex > typedText.length && (
+        <>
+          <span style={{ color: "orange" }}>/</span>
+          <span style={{ color: "orange" }}>&gt;</span>
+        </>
+      )}
+      {isSoftDev && subIndex > typedText.length && (
+        <span style={{ color: "#00bfa6" }}>&#125;</span> // }
+      )}
+
+      {/* Cursor */}
       <span style={{ opacity: blink ? 1 : 0 }}>|</span>
     </span>
   );
