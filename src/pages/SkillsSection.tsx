@@ -3,7 +3,6 @@ import { Box, Typography, Grid, Paper, useTheme } from "@mui/material";
 import CodeIcon from "@mui/icons-material/Code";
 import StorageIcon from "@mui/icons-material/Storage";
 import BuildIcon from "@mui/icons-material/Build";
-// import DataUsageIcon from "@mui/icons-material/DataUsage";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import JavascriptIcon from "@mui/icons-material/Javascript";
 
@@ -248,7 +247,7 @@ const SkillsSection: React.FC = () => {
       </Typography>
       <Grid container spacing={3}>
         {skills.map((skill) => (
-          <Grid xs={12} sm={6} md={4} key={skill.category}>
+          <Grid item xs={12} sm={6} md={4} key={skill.category}>
             <Paper
               elevation={0}
               sx={{
