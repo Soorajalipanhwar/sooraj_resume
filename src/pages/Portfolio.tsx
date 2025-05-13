@@ -11,7 +11,6 @@ const projects = [
     description:
       "An OCR-based text recognition app that extracts text from images.",
     technologies: ["Python", "OpenCV", "Tesseract"],
-    liveDemo: "https://soorajalipanhwar.github.io/My-Website/",
     github: "https://github.com/Soorajalipanhwar/OCR-Text-Recognition",
     imageUrl: "https://soorajalipanhwar.github.io/My-Website/assets/OCR.jpeg",
   },
@@ -197,7 +196,7 @@ const CustomCard: React.FC<CustomCardProps> = ({
           {github && (
             <Button
               size="small"
-              color="secondary"
+              color="warning"
               href={github}
               target="_blank"
               startIcon={<GitHubIcon />}
