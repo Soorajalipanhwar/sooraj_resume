@@ -1,10 +1,6 @@
-import React from "react";
-import { Box, Typography, Grid, Card, Button } from "@mui/material";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LaunchIcon from "@mui/icons-material/Launch";
-import { useThemeContext } from "../contexts/ThemeContext"; // Import your theme context
+import React, { useEffect, useRef, useState } from "react";
+import { useThemeContext } from "../contexts/ThemeContext"; // Your theme context
 
-// Project Data
 const projects = [
   {
     title: "OCR Text Recognition",
@@ -17,7 +13,7 @@ const projects = [
   {
     title: "GameStore Web API",
     description:
-      "This is a micrso-services based ASP.NET Core web API. created using EF Core and Dockerized SQl Server",
+      "This is a micro-services based ASP.NET Core web API. Created using EF Core and Dockerized SQL Server.",
     technologies: ["React", "Bootstrap", "Material UI", "axios api"],
     github:
       "https://github.com/Soorajalipanhwar/GameStore_ASP.NET_Core_Web_API",
@@ -27,7 +23,7 @@ const projects = [
   {
     title: "GameStore UI",
     description:
-      "This is the React based UI of GameStoreAPI that I developed using ASP.NET Core.I have used React, TypeScript, Bootstrap and Material UI to develop the Game Catelog.",
+      "This is the React based UI of GameStoreAPI that I developed using ASP.NET Core.",
     technologies: [".NET", "ASP.NET Core", "Entity Framwork", "SQL Server"],
     github:
       "https://github.com/Soorajalipanhwar/GameStore_ASP.NET_Core_Web_API",
@@ -57,7 +53,7 @@ const projects = [
   {
     title: "Simple Text Editor Application",
     description:
-      "This is a simple Text Editor with basic text editing and file handling functionalities. Visit My RMS repo on Github",
+      "This is a simple Text Editor with basic text editing and file handling functionalities.",
     technologies: [".NET", "WinForms", "SQL Server"],
     github: "https://github.com/Soorajalipanhwar/TextEditor",
     imageUrl:
@@ -74,182 +70,276 @@ const projects = [
   },
 ];
 
-// Reusable CustomCard Component
-interface CustomCardProps {
-  title: string;
-  description: string;
-  technologies: string[];
-  github?: string;
-  imageUrl?: string;
-  liveDemo?: string; // Optional, only for OCR project
-}
-
-const CustomCard: React.FC<CustomCardProps> = ({
+const CustomCard = ({
   title,
   description,
   technologies,
   github,
   imageUrl,
   liveDemo,
-}) => {
-  const { mode } = useThemeContext(); // Access the current theme mode (dark or light)
+  mode,
+  index,
+}: any) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = cardRef.current;
+    if (!node) return;
+
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <Card
-      sx={{
-        position: "relative", // For positioning the hover layer
-        height: "300px", // Adjust card height
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)", // Shadow for the card
-        borderRadius: 2,
-        background: "transparent", // Transparent background
-        overflow: "hidden",
-        cursor: "pointer", // Change cursor to pointer
-        transition: "transform 0.3s ease, box-shadow 0.3s ease", // Hover effect
-        "&:hover": {
-          transform: "translateY(-8px)", // Lift the card on hover
-          boxShadow: "0 8px 20px rgba(0, 0, 0, 0.6)", // Stronger shadow on hover
-        },
+    <div
+      ref={cardRef}
+      className={`col-12 col-sm-6 col-md-4 mb-4 d-flex align-items-stretch portfolio-card-appear`}
+      style={{
+        willChange: "opacity, transform",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(40px)",
+        transition:
+          "opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1)",
+        transitionDelay: visible ? `${index * 80}ms` : "0ms",
       }}
     >
-      {/* Image */}
-      {imageUrl && (
-        <Box
-          component="img"
-          src={imageUrl}
-          alt={title}
-          sx={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      )}
-
-      {/* Hover Layer */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "rgba(0, 0, 0, 0.7)", // Semi-transparent black background
-          color: "#ffffff",
+      <div
+        className={`card shadow-sm border-0 position-relative w-100 portfolio-card d-flex flex-column`}
+        style={{
+          height: 240,
+          background: mode === "dark" ? "#23272b" : "#fff",
+          color: mode === "dark" ? "#fff" : "#23272b",
+          overflow: "hidden",
+          transition: "box-shadow 0.3s, transform 0.3s",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          padding: 0,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          opacity: 0, // Initially hidden
-          transition: "opacity 0.3s ease", // Smooth fade-in effect
-          "&:hover": {
-            opacity: 1, // Show on hover
-          },
         }}
       >
-        {/* Title */}
-        <Typography variant="h6" fontWeight={600} gutterBottom>
-          {title}
-        </Typography>
-
-        {/* Description */}
-        <Typography
-          variant="body2"
-          color="inherit"
-          gutterBottom
-          sx={{
-            textAlign: "center",
-            px: 2, // Add padding for better alignment
-          }}
+        <div
+          className="position-relative w-100 h-100 d-flex flex-column"
+          style={{ height: "100%", width: "100%" }}
         >
-          {description}
-        </Typography>
-
-        {/* Technologies */}
-        <Typography
-          variant="body2"
-          sx={{
-            mt: 1,
-            fontWeight: 500,
-            textAlign: "center",
-          }}
-        >
-          Technologies: {technologies.join(", ")}
-        </Typography>
-
-        {/* Actions */}
-        <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
-          {liveDemo && (
-            <Button
-              size="small"
-              color="primary"
-              href={liveDemo}
-              target="_blank"
-              startIcon={<LaunchIcon />}
-            >
-              Live Demo
-            </Button>
-          )}
-          {github && (
-            <Button
-              size="small"
-              color="warning"
-              href={github}
-              target="_blank"
-              startIcon={<GitHubIcon />}
-            >
-              GitHub
-            </Button>
-          )}
-        </Box>
-      </Box>
-    </Card>
+          <img
+            src={imageUrl}
+            alt={title}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              transition: "transform 0.3s",
+              display: "block",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: 1,
+            }}
+            className="card-img"
+          />
+          <div
+            className="portfolio-hover-overlay d-flex flex-column justify-content-between align-items-center text-center px-3"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 2,
+              padding: "20px 16px 16px 16px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div>
+              <h5
+                className="mb-2"
+                style={{
+                  color: mode === "dark" ? "#ffc107" : "#1976d2",
+                  fontWeight: 700,
+                  letterSpacing: "0.5px",
+                }}
+              >
+                {title}
+              </h5>
+              <p
+                className="mb-2"
+                style={{
+                  fontSize: 15,
+                  color: "#b6c7d6", // Softer, lighter blue-gray
+                  fontWeight: 500,
+                }}
+              >
+                {description}
+              </p>
+              <p
+                className="mb-3"
+                style={{
+                  fontSize: 13,
+                  color: mode === "dark" ? "#adb5bd" : "#6c757d",
+                }}
+              >
+                <strong>Technologies:</strong> {technologies.join(", ")}
+              </p>
+            </div>
+            <div className="w-100 d-flex justify-content-center gap-2 mt-3">
+              {liveDemo && (
+                <a
+                  href={liveDemo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-sm me-2 custom-transparent-btn"
+                  style={{
+                    color: mode === "dark" ? "#fff" : "#1976d2",
+                    border: "none",
+                    boxShadow: "none",
+                    background: "transparent",
+                    transition: "background 0.2s",
+                    padding: "6px 18px",
+                  }}
+                >
+                  <i className="bi bi-box-arrow-up-right"></i> Live Demo
+                </a>
+              )}
+              {github && (
+                <a
+                  href={github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-sm custom-transparent-btn"
+                  style={{
+                    color: "#ffc107",
+                    border: "none",
+                    boxShadow: "none",
+                    background: "transparent",
+                    transition: "background 0.2s",
+                    padding: "6px 18px",
+                  }}
+                >
+                  <i
+                    className="bi bi-github"
+                    style={{ marginRight: 6, marginBottom: 2 }}
+                  ></i>
+                  GitHub
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+        <style>
+          {`
+          .portfolio-card {
+            position: relative;
+          }
+          .portfolio-hover-overlay {
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+          }
+          .portfolio-card:hover .portfolio-hover-overlay,
+          .portfolio-card:focus-within .portfolio-hover-overlay {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          .portfolio-card .card-img {
+            transition: transform 0.3s;
+          }
+          .portfolio-card:hover .card-img,
+          .portfolio-card:focus-within .card-img {
+            transform: scale(1.07);
+          }
+          .portfolio-card:hover,
+          .portfolio-card:focus-within {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25) !important;
+            transform: translateY(-6px) scale(1.03);
+          }
+          .custom-transparent-btn:hover, .custom-transparent-btn:focus {
+            background: rgba(25, 118, 210, 0.05) !important;
+          }
+          .custom-transparent-btn:active {
+            background: rgba(25, 118, 210, 0.08) !important;
+          }
+          .btn.custom-transparent-btn {
+            background: transparent !important;
+          }
+        `}
+        </style>
+      </div>
+    </div>
   );
 };
 
-// Portfolio Section
 const PortfolioSection: React.FC = () => {
-  const { mode } = useThemeContext(); // Access the current theme mode (dark or light)
+  const { mode } = useThemeContext();
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Fade in the whole section on mount
+    if (sectionRef.current) {
+      sectionRef.current.style.opacity = "0";
+      sectionRef.current.style.transform = "translateY(40px)";
+      setTimeout(() => {
+        if (sectionRef.current) {
+          sectionRef.current.style.transition =
+            "opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)";
+          sectionRef.current.style.opacity = "1";
+          sectionRef.current.style.transform = "translateY(0)";
+        }
+      }, 100);
+    }
+  }, []);
 
   return (
-    <Box
+    <div
+      ref={sectionRef}
       id="portfolio"
-      sx={{
+      className="container-fluid d-flex justify-content-center align-items-start"
+      style={{
         minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        px: 4,
-        py: 6,
-        background: "transparent", // Transparent background
-        color: mode === "dark" ? "#ffffff" : "#333333", // Adjust text color based on theme
+        background: "transparent",
+        color: mode === "dark" ? "#fff" : "#23272b",
+        paddingLeft: "5vw",
+        paddingRight: "5vw",
+        paddingTop: "80px",
+        paddingBottom: "40px",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        willChange: "opacity, transform",
       }}
     >
-      {/* Section Title */}
-      <Typography
-        variant="h5"
-        fontWeight={700}
-        gutterBottom
-        sx={{
-          textShadow: mode === "dark" ? "0px 2px 4px rgba(0,0,0,0.6)" : "none",
-        }}
-      >
-        Portfolio
-      </Typography>
-
-      {/* Cards in Grid Layout */}
-      <Grid container spacing={4} sx={{ mt: 4 }}>
-        {projects.map((project, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <CustomCard {...project} />
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+      <div style={{ width: "100%" }}>
+        <div className="text-center mb-5" style={{ paddingTop: "16px" }}>
+          <h2
+            style={{
+              fontWeight: 700,
+              textShadow:
+                mode === "dark" ? "0px 2px 4px rgba(0,0,0,0.6)" : "none",
+            }}
+          >
+            Portfolio
+          </h2>
+        </div>
+        <div className="row">
+          {projects.map((project, idx) => (
+            <CustomCard key={idx} {...project} mode={mode} index={idx} />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
