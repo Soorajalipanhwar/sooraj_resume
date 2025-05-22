@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  Paper,
-  useTheme,
-  useMediaQuery,
-  Card,
-  CardContent,
-  Chip,
-  Stack,
-} from "@mui/material";
+import { Box, Typography, Paper, useTheme } from "@mui/material";
 import CodeIcon from "@mui/icons-material/Code";
 import StorageIcon from "@mui/icons-material/Storage";
 import BuildIcon from "@mui/icons-material/Build";
@@ -178,7 +168,6 @@ const skills = [
 const SkillsSection: React.FC = () => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <section id="skills-experience">
@@ -235,17 +224,13 @@ const SkillsSection: React.FC = () => {
           >
             {/* Experience Heading */}
             <Typography
-              variant="h5"
-              fontWeight={700}
+              variant="h4"
+              fontWeight={800}
               sx={{
-                color: isDark ? "#fff" : "#111",
-                fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
-                fontSize: { xs: 20, sm: 22 },
-                letterSpacing: 0.5,
-                mb: 1.5,
-                textTransform: "uppercase",
-                lineHeight: 1.2,
-                textAlign: "center",
+                color: isDark ? "#64b5f6" : "#1976d2",
+                mb: 3,
+                letterSpacing: 1,
+                textAlign: "center", // Centered on all screens
                 width: "100%",
               }}
             >
@@ -458,276 +443,156 @@ const SkillsSection: React.FC = () => {
               width: "100%",
             }}
           >
+            {/* Skills Heading */}
             <Typography
-              variant="h5"
-              fontWeight={700}
+              variant="h4"
+              fontWeight={800}
               gutterBottom
               sx={{
-                color: isDark ? "#fff" : "#111",
-                fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
-                fontSize: { xs: 20, sm: 22 },
-                letterSpacing: 0.5,
-                mb: 1.5,
-                textTransform: "uppercase",
-                lineHeight: 1.2,
+                color: isDark ? "#64b5f6" : "#1976d2",
+                textShadow: isDark ? "0px 2px 8px #0d47a1" : "none",
                 textAlign: { xs: "left", md: "left" },
                 width: "100%",
+                mb: 3,
+                letterSpacing: 1,
               }}
             >
               Skills & Tech Stack
             </Typography>
-            {/* MOBILE VIEW: Custom compact cards */}
-            {isMobile ? (
-              <Stack spacing={2} sx={{ width: "100%" }}>
-                {skills.map((skill) => (
-                  <Box key={skill.category} sx={{ width: "100%" }}>
-                    {/* Heading above card, centered */}
-                    <Typography
-                      variant="subtitle2"
-                      fontWeight={700}
-                      sx={{
-                        color: isDark ? "#90caf9" : "#1976d2",
-                        fontSize: 15,
-                        letterSpacing: 0.2,
-                        mb: 0.5,
-                        textAlign: "center",
-                        width: "100%",
-                      }}
-                    >
-                      {skill.category}
-                    </Typography>
-                    <Card
-                      elevation={0}
-                      sx={{
-                        display: "flex",
-                        alignItems: "stretch",
-                        borderRadius: 3,
-                        px: 0,
-                        py: 0,
-                        background: isDark ? "#23272b" : "#f7fafd",
-                        boxShadow: isDark
-                          ? "0 1px 6px 0 #1976d2aa"
-                          : "0 1px 6px 0 #90caf9aa",
-                        border: `1.5px solid ${isDark ? "#37474f" : "#e3f2fd"}`,
-                        minHeight: 48,
-                      }}
-                    >
-                      {/* Icon header on the left */}
-                      <Box
-                        sx={{
-                          minWidth: 44,
-                          maxWidth: 44,
-                          background: isDark ? "#263238" : "#e3f2fd",
-                          borderTopLeftRadius: 12,
-                          borderBottomLeftRadius: 12,
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          py: 1,
-                          px: 0.5,
-                          borderRight: `1.5px solid ${
-                            isDark ? "#37474f" : "#bbdefb"
-                          }`,
-                        }}
-                      >
-                        {/* Give the icon the same color as in desktop view */}
-                        {React.cloneElement(skill.icon, {
-                          fontSize: "small",
-                          sx: {
-                            fontSize: 22,
-                            color:
-                              skill.category === "Frontend"
-                                ? "#1976d2"
-                                : skill.category === "Backend"
-                                ? "#388e3c"
-                                : skill.category === "Database"
-                                ? "#f57c00"
-                                : skill.category === "Programming Languages"
-                                ? "#d32f2f"
-                                : skill.category === "Tools"
-                                ? "#0288d1"
-                                : undefined,
-                          },
-                        })}
-                      </Box>
-                      {/* Skills chips */}
-                      <Box
-                        sx={{
-                          flex: 1,
-                          display: "flex",
-                          flexWrap: "wrap",
-                          gap: 0.5,
-                          alignItems: "center",
-                          justifyContent: "center",
-                          px: 1,
-                          py: 1,
-                        }}
-                      >
-                        {skill.items.map((item) => (
-                          <Chip
-                            key={item.name}
-                            icon={
-                              React.isValidElement(item.icon)
-                                ? React.cloneElement(item.icon, {
-                                    sx: { fontSize: 14, width: 16, height: 16 },
-                                  })
-                                : item.icon
-                            }
-                            label={item.name}
-                            size="small"
-                            sx={{
-                              fontSize: 10.5,
-                              px: 0.5,
-                              bgcolor: isDark ? "#263238" : "#e3f2fd",
-                              color: isDark ? "#fff" : "#1976d2",
-                              fontWeight: 500,
-                              mb: 0.5,
-                              height: 22,
-                            }}
-                          />
-                        ))}
-                      </Box>
-                    </Card>
-                  </Box>
-                ))}
-              </Stack>
-            ) : (
-              // DESKTOP VIEW: Original design
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: { xs: "flex-start", md: "flex-start" },
-                  gap: 2,
-                  width: { xs: "100%", md: "90%" },
-                  mt: 2,
-                }}
-              >
-                {skills.map((skill, idx) => (
-                  <Paper
-                    key={skill.category}
-                    elevation={2}
+            {/* Stack all skill cards in a column */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: { xs: "flex-start", md: "flex-start" },
+                gap: 2,
+                width: { xs: "100%", md: "90%" },
+                mt: 2,
+              }}
+            >
+              {skills.map((skill, idx) => (
+                <Paper
+                  key={skill.category}
+                  elevation={2}
+                  sx={{
+                    position: "relative",
+                    p: 0.7,
+                    borderRadius: 3,
+                    background: isDark ? "#23272b" : "#fff",
+                    textAlign: "center",
+                    width: { xs: "100%", md: 340 },
+                    minHeight: 44,
+                    overflow: "visible",
+                    boxShadow: isDark
+                      ? "0 2px 8px 0 rgba(25, 118, 210, 0.10)"
+                      : "0 2px 8px 0 rgba(33, 150, 243, 0.07)",
+                    mb: 1,
+                    "&:hover .drawer": {
+                      opacity: 1,
+                      transform: "translateX(0)",
+                      pointerEvents: "auto",
+                    },
+                    transition:
+                      "box-shadow 0.3s, width 0.3s, min-height 0.3s, padding 0.3s",
+                  }}
+                >
+                  {/* Skill Icon */}
+                  <Box
                     sx={{
-                      position: "relative",
-                      p: 0.7,
-                      borderRadius: 3,
-                      background: isDark ? "#23272b" : "#fff",
-                      textAlign: "center",
-                      width: { xs: "100%", md: 340 },
-                      minHeight: 44,
-                      overflow: "visible",
-                      boxShadow: isDark
-                        ? "0 2px 8px 0 rgba(25, 118, 210, 0.10)"
-                        : "0 2px 8px 0 rgba(33, 150, 243, 0.07)",
-                      mb: 1,
-                      "&:hover .drawer": {
-                        opacity: 1,
-                        transform: "translateX(0)",
-                        pointerEvents: "auto",
-                      },
-                      transition:
-                        "box-shadow 0.3s, width 0.3s, min-height 0.3s, padding 0.3s",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      mb: 0.5,
                     }}
                   >
-                    {/* Skill Icon */}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        mb: 0.5,
-                      }}
-                    >
-                      {skill.icon}
-                    </Box>
-                    {/* Category Text */}
-                    <Typography
-                      variant="subtitle1"
-                      fontWeight={700}
-                      sx={{
-                        color: isDark ? "#4caf50" : "#1976d2",
-                        fontSize: 16,
-                        letterSpacing: 0.5,
-                        textShadow: isDark
-                          ? "0px 1px 6px #000"
-                          : "0px 1px 2px #90caf9",
-                      }}
-                    >
-                      {skill.category}
-                    </Typography>
-                    {/* Drawer slides out to the right */}
-                    <Box
-                      className="drawer"
-                      sx={{
-                        position: "absolute",
-                        paddingLeft: 2,
-                        top: idx === skills.length - 1 ? "auto" : 0,
-                        bottom: idx === skills.length - 1 ? 0 : "auto",
-                        left: "100%",
-                        width: 200,
-                        background: "none",
-                        borderRadius: "12px",
-                        boxShadow: 3,
-                        zIndex: 10,
-                        opacity: isMobile ? 0 : 0, // Always hidden on mobile
-                        pointerEvents: "none",
-                        transform: "translateX(-24px)",
-                        transition: "all 0.3s cubic-bezier(.4,0,.2,1)",
-                        display: isMobile ? "none" : "flex", // Hide on mobile
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        py: 2,
-                        gap: 1,
-                      }}
-                    >
-                      {!isMobile &&
-                        skill.items.map((item) => (
-                          <Box
-                            key={item.name}
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 1,
-                              p: 1,
-                              borderRadius: 2,
-                              background: isDark
-                                ? "rgba(255, 255, 255, 0.1)"
-                                : "rgba(0, 0, 0, 0.05)",
-                              width: "90%",
-                              justifyContent: "flex-start",
-                              transition:
-                                "box-shadow 0.25s, transform 0.25s, background 0.25s",
-                              cursor: "pointer",
-                              "&:hover": {
-                                boxShadow: isDark
-                                  ? "0 0 12px 2px #90caf9, 0 0 2px #fff"
-                                  : "0 0 12px 2px #1976d2, 0 0 2px #fff",
-                                background: isDark
-                                  ? "rgba(30, 136, 229, 0.18)"
-                                  : "rgba(25, 118, 210, 0.08)",
-                                transform: "scale(1.07)",
-                              },
-                            }}
-                          >
-                            {item.icon}
-                            <Typography
-                              variant="body2"
-                              sx={{
-                                color: isDark ? "#ffffff" : "#333333",
-                                fontWeight: 500,
-                                letterSpacing: 0.2,
-                              }}
-                            >
-                              {item.name}
-                            </Typography>
-                          </Box>
-                        ))}
-                    </Box>
-                  </Paper>
-                ))}
-              </Box>
-            )}
+                    {skill.icon}
+                  </Box>
+                  {/* Category Text */}
+                  <Typography
+                    variant="subtitle1"
+                    fontWeight={700}
+                    sx={{
+                      color: isDark ? "#4caf50" : "#1976d2",
+                      fontSize: 16,
+                      letterSpacing: 0.5,
+                      textShadow: isDark
+                        ? "0px 1px 6px #000"
+                        : "0px 1px 2px #90caf9",
+                    }}
+                  >
+                    {skill.category}
+                  </Typography>
+                  {/* Drawer slides out to the right */}
+                  <Box
+                    className="drawer"
+                    sx={{
+                      position: "absolute",
+                      paddingLeft: 2,
+                      top: idx === skills.length - 1 ? "auto" : 0,
+                      bottom: idx === skills.length - 1 ? 0 : "auto",
+                      left: "100%",
+                      width: 200,
+                      // Remove background color so only skills are visible
+                      background: "none",
+                      borderRadius: "12px",
+                      boxShadow: 3,
+                      zIndex: 10,
+                      opacity: 0,
+                      pointerEvents: "none",
+                      transform: "translateX(-24px)",
+                      transition: "all 0.3s cubic-bezier(.4,0,.2,1)",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                      py: 2,
+                      gap: 1,
+                    }}
+                  >
+                    {skill.items.map((item) => (
+                      <Box
+                        key={item.name}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                          p: 1,
+                          borderRadius: 2,
+                          background: isDark
+                            ? "rgba(255, 255, 255, 0.1)"
+                            : "rgba(0, 0, 0, 0.05)",
+                          width: "90%",
+                          justifyContent: "flex-start",
+                          transition:
+                            "box-shadow 0.25s, transform 0.25s, background 0.25s",
+                          cursor: "pointer",
+                          "&:hover": {
+                            boxShadow: isDark
+                              ? "0 0 12px 2px #90caf9, 0 0 2px #fff"
+                              : "0 0 12px 2px #1976d2, 0 0 2px #fff",
+                            background: isDark
+                              ? "rgba(30, 136, 229, 0.18)"
+                              : "rgba(25, 118, 210, 0.08)",
+                            transform: "scale(1.07)",
+                          },
+                        }}
+                      >
+                        {item.icon}
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: isDark ? "#ffffff" : "#333333",
+                            fontWeight: 500,
+                            letterSpacing: 0.2,
+                          }}
+                        >
+                          {item.name}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </Paper>
+              ))}
+            </Box>
           </Box>
         </Paper>
       </Box>

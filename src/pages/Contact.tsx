@@ -12,8 +12,8 @@ const ContactSection: React.FC = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
+    // const email = formData.get("email");
+    // const message = formData.get("message");
 
     // Simulate form submission (replace this with your actual email service)
     alert(`Thank you, ${name}! Your message has been sent.`);
