@@ -224,13 +224,17 @@ const SkillsSection: React.FC = () => {
           >
             {/* Experience Heading */}
             <Typography
-              variant="h4"
-              fontWeight={800}
+              variant="h5"
+              fontWeight={700}
               sx={{
-                color: isDark ? "#64b5f6" : "#1976d2",
-                mb: 3,
-                letterSpacing: 1,
-                textAlign: "center", // Centered on all screens
+                color: isDark ? "#fff" : "#111",
+                fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
+                fontSize: { xs: 20, sm: 22 },
+                letterSpacing: 0.5,
+                mb: 1.5,
+                textTransform: "uppercase",
+                lineHeight: 1.2,
+                textAlign: "center",
                 width: "100%",
               }}
             >
@@ -445,16 +449,19 @@ const SkillsSection: React.FC = () => {
           >
             {/* Skills Heading */}
             <Typography
-              variant="h4"
-              fontWeight={800}
+              variant="h5"
+              fontWeight={700}
               gutterBottom
               sx={{
-                color: isDark ? "#64b5f6" : "#1976d2",
-                textShadow: isDark ? "0px 2px 8px #0d47a1" : "none",
+                color: isDark ? "#fff" : "#111",
+                fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
+                fontSize: { xs: 20, sm: 22 },
+                letterSpacing: 0.5,
+                mb: 1.5,
+                textTransform: "uppercase",
+                lineHeight: 1.2,
                 textAlign: { xs: "left", md: "left" },
                 width: "100%",
-                mb: 3,
-                letterSpacing: 1,
               }}
             >
               Skills & Tech Stack

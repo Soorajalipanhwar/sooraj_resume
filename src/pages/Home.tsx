@@ -137,24 +137,11 @@ const Home: React.FC = () => {
           transform: visible ? "none" : "translateY(40px)",
           transition:
             "opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)",
+          background: "none", // Remove any background
+          boxShadow: "none", // Remove any box shadow
+          border: "none", // Remove any border
         }}
       >
-        {/* Diagonal split overlay */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 0,
-            pointerEvents: "none",
-            background: `linear-gradient(120deg, transparent 60%, ${
-              isDark ? "#1976d2" : "#1976d2"
-            } 100%)`,
-            opacity: 0.15,
-          }}
-        />
         <Stack
           direction={isMobile ? "column" : "row"}
           spacing={isMobile ? 6 : 8} // Increased spacing for mobile
@@ -165,29 +152,21 @@ const Home: React.FC = () => {
           {/* Image Card */}
           <Card
             ref={cardRef}
-            elevation={10}
+            elevation={0}
             onMouseMove={isMobile ? undefined : handleMouseMove}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={handleMouseLeave}
             sx={{
-              width: { xs: 430, md: 340 }, // Increased width for mobile
-              height: { xs: 630, md: 420 }, // Increased height for mobile
+              width: { xs: 430, md: 340 },
+              height: { xs: 630, md: 420 },
               borderRadius: 6,
               overflow: "hidden",
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "center",
-              boxShadow: hovered
-                ? `0 16px 48px 0 ${theme.palette.primary.main}55`
-                : isDark
-                ? "0 8px 32px 0 rgba(0,0,0,0.7)"
-                : "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
-              background: isDark
-                ? "rgba(30, 30, 40, 0.95)"
-                : "rgba(255,255,255,0.95)",
-              transition:
-                "box-shadow 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1)",
-              mt: isMobile ? 2 : 6, // Adjusted margin for mobile
+              boxShadow: "none", // Remove shadow
+              background: "none", // Remove background
+              mt: isMobile ? 2 : 6,
               cursor: "pointer",
               transform: hovered
                 ? `scale(1.06) rotateX(${
@@ -197,6 +176,8 @@ const Home: React.FC = () => {
               filter: hovered
                 ? "brightness(1.08) saturate(1.2) drop-shadow(0 4px 24px #1976d2aa)"
                 : "none",
+              transition:
+                "box-shadow 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1)",
             }}
           >
             <Box
