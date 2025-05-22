@@ -38,11 +38,16 @@ const App: React.FC = () => {
           mode === "dark"
             ? "linear-gradient(120deg, #232526 60%, #1976d2 100%)"
             : "linear-gradient(120deg, #e3f2fd 60%, #1976d2 100%)",
-        backgroundAttachment: "fixed", // Ensures the background is fixed
+        backgroundAttachment: "fixed",
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
-        width: "100%",
+        width: "100vw", // <-- Use 100vw for full viewport width
+        maxWidth: "100vw", // <-- Prevent overflow
+        overflowX: "hidden", // <-- Hide horizontal scroll
+        boxSizing: "border-box", // <-- Ensure padding/border don't cause overflow
+        m: 0, // <-- Remove any default margin
+        p: 0, // <-- Remove any default padding
       }}
     >
       {/* HEADER / NAVBAR */}
