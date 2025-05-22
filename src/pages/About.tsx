@@ -7,7 +7,6 @@ import {
   Avatar,
   Fade,
   Link,
-  Popper,
 } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import SkillsSection from "./SkillsSection";
@@ -19,10 +18,6 @@ const educationData = [
     institution: "Govt. (Boys) High School, Badah, Larkana",
     year: "2012-2017",
     details: "Science Group",
-    timelineImage:
-      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/4.jpg", // Timeline image
-    hoverImage:
-      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/new.png", // Hover image
   },
   {
     icon: <SchoolIcon color="primary" fontSize="small" />, // College icon
@@ -30,10 +25,6 @@ const educationData = [
     institution: "Govt.(Boys) Higher Secondary School Badah, Larkana",
     year: "2017-2019",
     details: "Pre-Engineering",
-    timelineImage:
-      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/intermediate-icon.jpg", // Timeline image
-    hoverImage:
-      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/new.png", // Hover image
   },
   {
     icon: <SchoolIcon color="primary" fontSize="small" />, // University icon
@@ -42,10 +33,6 @@ const educationData = [
       "Quaid-E-Awam University of Engineering Science and Technology, Nawabshah",
     year: "2020-2024",
     details: "CGPA: 3.67 / 4.0",
-    timelineImage:
-      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/bs-icon.jpg", // Timeline image
-    hoverImage:
-      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/new.png", // Hover image
   },
 ];
 
@@ -92,9 +79,6 @@ const About: React.FC = () => {
     Array(educationData.length).fill(false)
   );
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
-  // Add state for popper/dialog
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     setTimeout(() => setVisible(true), 200);
@@ -265,15 +249,6 @@ const About: React.FC = () => {
                               ? 40
                               : 20,
                         }}
-                        // Add mouse events for dialog popper
-                        onMouseEnter={(e) => {
-                          setHoveredIdx(idx);
-                          setAnchorEl(e.currentTarget as HTMLElement);
-                        }}
-                        onMouseLeave={() => {
-                          setHoveredIdx(null);
-                          setAnchorEl(null);
-                        }}
                       >
                         {/* Dot */}
                         <Box
@@ -343,68 +318,6 @@ const About: React.FC = () => {
                             </Typography>
                           </Box>
                         </Box>
-                        {/* Dialog Popper for image */}
-                        <Popper
-                          open={hoveredIdx === idx}
-                          anchorEl={anchorEl}
-                          placement="right-start"
-                          transition
-                          disablePortal
-                          modifiers={[
-                            {
-                              name: "offset",
-                              options: {
-                                offset: [0, 5], // move up to fit above certificates
-                              },
-                            },
-                          ]}
-                          sx={{
-                            zIndex: 1302,
-                            pointerEvents: "none",
-                            display: { xs: "none", sm: "block" }, // Hide on xs (mobile), show on sm and up
-                          }}
-                        >
-                          {({ TransitionProps }) => (
-                            <Fade {...TransitionProps} timeout={200}>
-                              <Box
-                                sx={{
-                                  p: 1,
-                                  bgcolor: isDark
-                                    ? "rgba(30,30,40,0.98)"
-                                    : "#fff",
-                                  borderRadius: 2,
-                                  boxShadow: 6,
-                                  border: isDark
-                                    ? "1.5px solid #37474f"
-                                    : "1.5px solid #e3f2fd",
-                                  minWidth: 120,
-                                  maxWidth: 180,
-                                  minHeight: 80,
-                                  maxHeight: 120,
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  overflow: "hidden",
-                                }}
-                              >
-                                <img
-                                  src={item.hoverImage}
-                                  alt={item.label}
-                                  style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    maxWidth: "100%",
-                                    maxHeight: "100%",
-                                    objectFit: "contain",
-                                    borderRadius: 8,
-                                    boxShadow: "0 2px 8px #1976d222",
-                                    display: "block",
-                                  }}
-                                />
-                              </Box>
-                            </Fade>
-                          )}
-                        </Popper>
                       </li>
                     </Fade>
                   ))}
