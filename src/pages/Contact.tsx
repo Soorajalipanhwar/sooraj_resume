@@ -30,11 +30,8 @@ const ContactSection: React.FC = () => {
         justifyContent: "center",
         px: 4,
         py: 6,
-        background:
-          mode === "dark"
-            ? "linear-gradient(120deg, #232526 60%, #1976d2 100%)"
-            : "linear-gradient(120deg, #e3f2fd 60%, #1976d2 100%)", // Same background as other sections
-        color: mode === "dark" ? "#ffffff" : "#333333", // Adjust text color based on theme
+        background: "none", // Remove background for transparency
+        color: mode === "dark" ? "#ffffff" : "#333333",
       }}
     >
       {/* Section Title */}
