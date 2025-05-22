@@ -277,6 +277,18 @@ const SkillsSection: React.FC = () => {
                         : "rgba(0, 0, 0, 0.05)",
                       width: "90%",
                       justifyContent: "center",
+                      transition:
+                        "box-shadow 0.25s, transform 0.25s, background 0.25s",
+                      cursor: "pointer",
+                      "&:hover": {
+                        boxShadow: isDark
+                          ? "0 0 12px 2px #90caf9, 0 0 2px #fff"
+                          : "0 0 12px 2px #1976d2, 0 0 2px #fff",
+                        background: isDark
+                          ? "rgba(30, 136, 229, 0.18)"
+                          : "rgba(25, 118, 210, 0.08)",
+                        transform: "scale(1.07)",
+                      },
                     }}
                   >
                     {item.icon}
@@ -284,6 +296,8 @@ const SkillsSection: React.FC = () => {
                       variant="body2"
                       sx={{
                         color: isDark ? "#ffffff" : "#333333",
+                        fontWeight: 500,
+                        letterSpacing: 0.2,
                       }}
                     >
                       {item.name}
