@@ -174,47 +174,123 @@ const SkillsSection: React.FC = () => {
       sx={{
         minHeight: "100vh",
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        flexDirection: { xs: "column", md: "row" }, // Row on desktop, column on mobile
+        alignItems: "stretch",
         justifyContent: "center",
         px: 4,
         py: 6,
         background: isDark
           ? "linear-gradient(135deg, #1e1e2f, #121212)"
           : "linear-gradient(135deg, #f5f5f5, #ffffff)",
+        gap: { xs: 4, md: 8 },
       }}
     >
-      <Typography
-        variant="h5"
-        fontWeight={700}
-        gutterBottom
+      {/* Experience Column (first on mobile, right on desktop) */}
+      <Box
         sx={{
-          color: isDark ? "#ffffff" : "#333333",
-          textShadow: isDark ? "0px 2px 4px rgba(0,0,0,0.6)" : "none",
+          order: { xs: 1, md: 2 }, // Show first on mobile, second on desktop
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: { xs: "center", md: "flex-start" },
+          justifyContent: "center",
+          mt: { xs: 0, md: 0 },
         }}
       >
-        Skills & Tech Stack
-      </Typography>
-      <Grid container spacing={3} hoverEffect sx={{ cursor: "pointer" }}>
-        {skills.map((skill) => (
-          <Grid item xs={12} sm={6} md={4} key={skill.category}>
+        <Typography
+          variant="h5"
+          fontWeight={700}
+          gutterBottom
+          sx={{
+            color: isDark ? "#ffffff" : "#333333",
+            textShadow: isDark ? "0px 2px 4px rgba(0,0,0,0.6)" : "none",
+            textAlign: { xs: "center", md: "left" },
+            width: "100%",
+          }}
+        >
+          Experience
+        </Typography>
+        {/* Add your experience timeline/cards here */}
+        <Box
+          sx={{
+            width: { xs: "100%", md: "90%" },
+            minHeight: 200,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: { xs: "center", md: "flex-start" },
+            border: "2px dashed #aaa",
+            borderRadius: 3,
+            color: "#aaa",
+            p: 3,
+            mt: 2,
+          }}
+        >
+          {/* Example placeholder */}
+          <Typography variant="body1">
+            Your internship and job experiences will appear here.
+          </Typography>
+        </Box>
+      </Box>
+
+      {/* Skills Column (second on mobile, left on desktop) */}
+      <Box
+        sx={{
+          order: { xs: 2, md: 1 }, // Show second on mobile, first on desktop
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: { xs: "flex-start", md: "flex-start" }, // Align to left on all screens
+          justifyContent: "center",
+        }}
+      >
+        <Typography
+          variant="h5"
+          fontWeight={700}
+          gutterBottom
+          sx={{
+            color: isDark ? "#64b5f6" : "#1976d2", // More appealing blue for both themes
+            textShadow: isDark ? "0px 2px 8px #0d47a1" : "none",
+            textAlign: { xs: "left", md: "left" },
+            width: "100%",
+          }}
+        >
+          Skills & Tech Stack
+        </Typography>
+        {/* Stack all skill cards in a column */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: { xs: "flex-start", md: "flex-start" }, // Align cards left
+            gap: 2, // slightly less gap for compactness
+            width: { xs: "100%", md: "90%" },
+            mt: 2,
+          }}
+        >
+          {skills.map((skill) => (
             <Paper
-              elevation={0}
+              key={skill.category}
+              elevation={2}
               sx={{
                 position: "relative",
-                p: 0,
-                borderRadius: 0,
-                background: "transparent", // Fully transparent background
+                p: 0.7, // Even less padding for shorter cards
+                borderRadius: 3,
+                background: isDark ? "#23272b" : "#fff",
                 textAlign: "center",
-                width: 180,
-                height: 120,
+                width: { xs: "100%", md: 340 }, // Slightly wider for balance
+                minHeight: 44, // Even shorter cards
                 overflow: "visible",
-                boxShadow: "none", // No shadow
+                boxShadow: isDark
+                  ? "0 2px 8px 0 rgba(25, 118, 210, 0.10)"
+                  : "0 2px 8px 0 rgba(33, 150, 243, 0.07)",
+                mb: 1,
                 "&:hover .drawer": {
                   opacity: 1,
-                  transform: "translateY(0)",
+                  transform: "translateX(0)",
                   pointerEvents: "auto",
                 },
+                transition:
+                  "box-shadow 0.3s, width 0.3s, min-height 0.3s, padding 0.3s",
               }}
             >
               {/* Skill Icon */}
@@ -223,42 +299,45 @@ const SkillsSection: React.FC = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  mb: 1,
+                  mb: 0.5, // less margin for compactness
                 }}
               >
                 {skill.icon}
               </Box>
-
               {/* Category Text */}
               <Typography
                 variant="subtitle1"
-                fontWeight={600}
+                fontWeight={700}
                 sx={{
-                  color: isDark ? "#ffffff" : "#333333",
+                  color: isDark ? "#4caf50" : "#1976d2", // Green on dark, blue on light
+                  fontSize: 16,
+                  letterSpacing: 0.5,
+                  textShadow: isDark
+                    ? "0px 1px 6px #000"
+                    : "0px 1px 2px #90caf9",
                 }}
               >
                 {skill.category}
               </Typography>
-
-              {/* Drawer */}
+              {/* Drawer slides out to the right */}
               <Box
                 className="drawer"
                 sx={{
                   position: "absolute",
-                  top: "100%",
-                  left: 0,
-                  width: "100%",
-                  background: "transparent", // 🔥 Fully transparent
-                  borderRadius: "0 0 16px 16px",
-                  boxShadow: "none", // No shadow
+                  top: 0,
+                  left: "100%",
+                  width: 200,
+                  background: isDark ? "#23272b" : "#fff",
+                  borderRadius: "0 12px 12px 0",
+                  boxShadow: 3,
                   zIndex: 10,
                   opacity: 0,
                   pointerEvents: "none",
-                  transform: "translateY(-10px)",
-                  transition: "all 0.3s ease",
+                  transform: "translateX(-24px)",
+                  transition: "all 0.3s cubic-bezier(.4,0,.2,1)",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
+                  alignItems: "flex-start",
                   py: 2,
                   gap: 1,
                 }}
@@ -276,7 +355,7 @@ const SkillsSection: React.FC = () => {
                         ? "rgba(255, 255, 255, 0.1)"
                         : "rgba(0, 0, 0, 0.05)",
                       width: "90%",
-                      justifyContent: "center",
+                      justifyContent: "flex-start",
                       transition:
                         "box-shadow 0.25s, transform 0.25s, background 0.25s",
                       cursor: "pointer",
@@ -306,9 +385,9 @@ const SkillsSection: React.FC = () => {
                 ))}
               </Box>
             </Paper>
-          </Grid>
-        ))}
-      </Grid>
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 };
