@@ -7,6 +7,7 @@ import {
   Avatar,
   Fade,
   Link,
+  Popper,
 } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import SkillsSection from "./SkillsSection";
@@ -32,7 +33,7 @@ const educationData = [
     timelineImage:
       "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/intermediate-icon.jpg", // Timeline image
     hoverImage:
-      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/intermediate.jpg", // Hover image
+      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/new.png", // Hover image
   },
   {
     icon: <SchoolIcon color="primary" fontSize="small" />, // University icon
@@ -44,7 +45,7 @@ const educationData = [
     timelineImage:
       "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/bs-icon.jpg", // Timeline image
     hoverImage:
-      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/bs-computer-science.jpg", // Hover image
+      "https://raw.githubusercontent.com/Soorajalipanhwar/My-Website/main/assets/new.png", // Hover image
   },
 ];
 
@@ -91,6 +92,9 @@ const About: React.FC = () => {
     Array(educationData.length).fill(false)
   );
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  // Add state for popper/dialog
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     setTimeout(() => setVisible(true), 200);
@@ -200,11 +204,16 @@ const About: React.FC = () => {
                     }}
                   />
                   <Typography
-                    variant="h4"
-                    fontWeight={800}
+                    variant="h5"
+                    fontWeight={700}
                     sx={{
-                      color: theme.palette.primary.main,
-                      letterSpacing: 1,
+                      color: isDark ? "#fff" : "#111",
+                      fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
+                      fontSize: { xs: 20, sm: 22 },
+                      letterSpacing: 0.5,
+                      mb: 1,
+                      textTransform: "uppercase",
+                      lineHeight: 1.2,
                     }}
                   >
                     My Education
@@ -255,6 +264,15 @@ const About: React.FC = () => {
                               : window.innerWidth < 900
                               ? 40
                               : 20,
+                        }}
+                        // Add mouse events for dialog popper
+                        onMouseEnter={(e) => {
+                          setHoveredIdx(idx);
+                          setAnchorEl(e.currentTarget as HTMLElement);
+                        }}
+                        onMouseLeave={() => {
+                          setHoveredIdx(null);
+                          setAnchorEl(null);
                         }}
                       >
                         {/* Dot */}
@@ -325,6 +343,68 @@ const About: React.FC = () => {
                             </Typography>
                           </Box>
                         </Box>
+                        {/* Dialog Popper for image */}
+                        <Popper
+                          open={hoveredIdx === idx}
+                          anchorEl={anchorEl}
+                          placement="right-start"
+                          transition
+                          disablePortal
+                          modifiers={[
+                            {
+                              name: "offset",
+                              options: {
+                                offset: [0, 5], // move up to fit above certificates
+                              },
+                            },
+                          ]}
+                          sx={{
+                            zIndex: 1302,
+                            pointerEvents: "none",
+                            display: { xs: "none", sm: "block" }, // Hide on xs (mobile), show on sm and up
+                          }}
+                        >
+                          {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={200}>
+                              <Box
+                                sx={{
+                                  p: 1,
+                                  bgcolor: isDark
+                                    ? "rgba(30,30,40,0.98)"
+                                    : "#fff",
+                                  borderRadius: 2,
+                                  boxShadow: 6,
+                                  border: isDark
+                                    ? "1.5px solid #37474f"
+                                    : "1.5px solid #e3f2fd",
+                                  minWidth: 120,
+                                  maxWidth: 180,
+                                  minHeight: 80,
+                                  maxHeight: 120,
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  overflow: "hidden",
+                                }}
+                              >
+                                <img
+                                  src={item.hoverImage}
+                                  alt={item.label}
+                                  style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    maxWidth: "100%",
+                                    maxHeight: "100%",
+                                    objectFit: "contain",
+                                    borderRadius: 8,
+                                    boxShadow: "0 2px 8px #1976d222",
+                                    display: "block",
+                                  }}
+                                />
+                              </Box>
+                            </Fade>
+                          )}
+                        </Popper>
                       </li>
                     </Fade>
                   ))}
@@ -346,13 +426,16 @@ const About: React.FC = () => {
                 }}
               >
                 <Typography
-                  variant="h6"
+                  variant="h5"
                   fontWeight={700}
                   sx={{
-                    color: theme.palette.primary.main,
+                    color: isDark ? "#fff" : "#111",
+                    fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
+                    fontSize: { xs: 20, sm: 22 },
+                    letterSpacing: 0.5,
                     mb: 1,
-                    letterSpacing: 1,
-                    fontSize: 18,
+                    textTransform: "uppercase",
+                    lineHeight: 1.2,
                   }}
                 >
                   Certificates
