@@ -195,7 +195,7 @@ const SkillsSection: React.FC = () => {
       >
         Skills & Tech Stack
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} hoverEffect sx={{ cursor: "pointer" }}>
         {skills.map((skill) => (
           <Grid item xs={12} sm={6} md={4} key={skill.category}>
             <Paper

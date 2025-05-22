@@ -266,6 +266,7 @@ const CustomCard = ({
           .portfolio-card:focus-within {
             box-shadow: 0 8px 24px rgba(0,0,0,0.25) !important;
             transform: translateY(-6px) scale(1.03);
+            cursor: pointer;
           }
           .custom-transparent-btn:hover, .custom-transparent-btn:focus {
             background: rgba(25, 118, 210, 0.05) !important;

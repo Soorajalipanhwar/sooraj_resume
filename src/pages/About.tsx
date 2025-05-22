@@ -293,10 +293,14 @@ const About: React.FC = () => {
                             display: "flex",
                             alignItems: "center",
                             minHeight: 100,
+                            cursor: "pointer",
                             transition:
-                              "box-shadow 0.4s cubic-bezier(.4,0,.2,1)",
+                              "box-shadow 0.4s cubic-bezier(.4,0,.2,1), background 0.3s,",
                             "&:hover": {
                               boxShadow: "0 8px 32px 0 #1976d2aa",
+                              background: isDark
+                                ? "rgba(30, 30, 60, 0.97)"
+                                : "rgba(255, 255, 255, 0.98)",
                             },
                           }}
                         >
