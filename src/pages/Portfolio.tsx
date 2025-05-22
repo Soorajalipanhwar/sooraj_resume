@@ -7,7 +7,7 @@ const projects = [
     description:
       "An OCR-based text recognition app that extracts text from images.",
     technologies: ["Python", "OpenCV", "Tesseract"],
-    github: "https://github.com/Soorajalipanhwar/OCR-Text-Recognition",
+    github: "https://github.com/Soorajalipanhwar/My-Simple-Urdu-OCR-App",
     imageUrl: "https://soorajalipanhwar.github.io/My-Website/assets/OCR.jpeg",
   },
   {
