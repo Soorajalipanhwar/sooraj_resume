@@ -1,13 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import {
-  Box,
-  Typography,
-  Paper,
-  useTheme,
-  Avatar,
-  Fade,
-  Link,
-} from "@mui/material";
+import { Box, Typography, Paper, useTheme, Fade } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import SkillsSection from "./SkillsSection";
 
@@ -378,7 +370,7 @@ const About: React.FC = () => {
                       zIndex: 0,
                     }}
                   />
-                  {certificates.map((cert, idx) => (
+                  {certificates.map((cert) => (
                     <Box
                       key={cert.title}
                       sx={{
