@@ -267,7 +267,7 @@ const SkillsSection: React.FC = () => {
             mt: 2,
           }}
         >
-          {skills.map((skill) => (
+          {skills.map((skill, idx) => (
             <Paper
               key={skill.category}
               elevation={2}
@@ -324,7 +324,8 @@ const SkillsSection: React.FC = () => {
                 className="drawer"
                 sx={{
                   position: "absolute",
-                  top: 0,
+                  top: idx === skills.length - 1 ? "auto" : 0, // For last card, use bottom
+                  bottom: idx === skills.length - 1 ? 0 : "auto",
                   left: "100%",
                   width: 200,
                   background: isDark ? "#23272b" : "#fff",
