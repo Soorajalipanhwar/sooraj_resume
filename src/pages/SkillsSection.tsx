@@ -7,7 +7,6 @@ import {
   useMediaQuery,
   Card,
   Chip,
-  Stack,
   Divider,
 } from "@mui/material";
 import CodeIcon from "@mui/icons-material/Code";
