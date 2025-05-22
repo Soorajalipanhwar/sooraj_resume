@@ -19,7 +19,7 @@ export const useThemeContext = () => {
 export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [mode, setMode] = useState<PaletteMode>("light");
+  const [mode, setMode] = useState<PaletteMode>("dark");
 
   const theme = useMemo(
     () =>
