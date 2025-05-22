@@ -6,9 +6,9 @@ import {
   useTheme,
   useMediaQuery,
   Card,
-  CardContent,
   Chip,
   Stack,
+  Divider,
 } from "@mui/material";
 import CodeIcon from "@mui/icons-material/Code";
 import StorageIcon from "@mui/icons-material/Storage";
@@ -235,214 +235,413 @@ const SkillsSection: React.FC = () => {
           >
             {/* Experience Heading */}
             <Typography
-              variant="h4"
-              fontWeight={800}
+              variant="h5"
+              fontWeight={700}
+              gutterBottom
               sx={{
-                color: isDark ? "#64b5f6" : "#1976d2",
-                mb: 3,
-                letterSpacing: 1,
-                textAlign: "center", // Centered on all screens
+                color: isDark ? "#fff" : "#111",
+                fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
+                fontSize: { xs: 20, sm: 22 },
+                letterSpacing: 0.5,
+                mb: 1.5,
+                textTransform: "uppercase",
+                lineHeight: 1.2,
+                textAlign: { xs: "center", md: "center" },
                 width: "100%",
               }}
             >
               Experience
             </Typography>
-            <Paper
-              elevation={16}
-              sx={{
-                width: { xs: "100%", md: 600 },
-                maxWidth: "100%",
-                borderRadius: 5,
-                p: { xs: 2, md: 3 }, // Reduced padding
-                background: isDark
-                  ? "linear-gradient(120deg, #23272b 80%, #263238 100%)"
-                  : "linear-gradient(120deg, #fafdff 80%, #e3f2fd 100%)",
-                boxShadow: isDark
-                  ? "0 8px 40px 0 #1976d2bb"
-                  : "0 8px 40px 0 #90caf9bb",
-                mb: 3,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: 2,
-                position: "relative",
-                overflow: "hidden",
-                border: isDark ? "2px solid #37474f" : "2px solid #e3f2fd",
-                transition: "transform 0.3s, box-shadow 0.3s",
-                minHeight: { xs: 260, md: 220 }, // Reduced minHeight
-                "&:hover": {
-                  transform: "translateY(-6px) scale(1.025)",
-                  boxShadow: isDark
-                    ? "0 16px 56px 0 #1976d2ee"
-                    : "0 16px 56px 0 #1976d2aa",
-                },
-              }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                <Typography
-                  variant="h6"
-                  fontWeight={700}
-                  sx={{
-                    color: isDark ? "#64b5f6" : "#1976d2",
-                    letterSpacing: 0.5,
-                    mr: 2,
-                    fontSize: 22,
-                  }}
-                >
-                  .NET Developer Intern
-                </Typography>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  sx={{
-                    color: isDark ? "#b0bec5" : "#607d8b",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    letterSpacing: 0.2,
-                  }}
-                >
-                  Imagyn Technologies
-                </Typography>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  sx={{
-                    ml: 2,
-                    color: isDark ? "#b0bec5" : "#607d8b",
-                    fontWeight: 500,
-                    fontSize: 14,
-                  }}
-                >
-                  (Mar – Jun 2025)
-                </Typography>
-              </Box>
-              <Typography
-                variant="body1"
-                sx={{
-                  color: isDark ? "#e0e0e0" : "#333",
-                  mb: 2,
-                  fontSize: 16,
-                  lineHeight: 1.8,
-                  letterSpacing: 0.1,
-                }}
-              >
-                .NET Core development, C# programming, and SQL Server database.
-                <br />
-                Developed scalable, fullstack web applications using ASP.NET
-                MVC.
-              </Typography>
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.2, mb: 2 }}>
-                {[".NET Core", "SQL Server", "JavaScript", "Bootstrap"].map(
-                  (tech) => (
-                    <Box
-                      key={tech}
-                      component="span"
-                      sx={{
-                        display: "inline-block",
-                        px: 1.7,
-                        py: 0.7,
-                        fontSize: 14,
-                        borderRadius: 2,
-                        bgcolor: isDark ? "#263238" : "#e3f2fd",
-                        color: isDark ? "#80cbc4" : "#1976d2",
-                        fontWeight: 600,
-                        letterSpacing: 0.2,
-                        boxShadow: isDark
-                          ? "0 1px 4px 0 #1976d2"
-                          : "0 1px 4px 0 #90caf9",
-                        border: isDark
-                          ? "1px solid #37474f"
-                          : "1px solid #bbdefb",
-                        transition: "box-shadow 0.2s",
-                        "&:hover": {
-                          boxShadow: "0 0 12px 2px #1976d2, 0 0 2px #fff",
-                          background: isDark
-                            ? "rgba(30, 136, 229, 0.18)"
-                            : "rgba(25, 118, 210, 0.08)",
-                        },
-                      }}
-                    >
-                      {tech}
-                    </Box>
-                  )
-                )}
-              </Box>
-              {/* Company Section: Heading on top, then logo, then description */}
-              <Box
+
+            {/* ========== MODIFIED EXPERIENCE CARD FOR MOBILE ========== */}
+            {isMobile ? (
+              <Card
+                elevation={0}
                 sx={{
                   width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  mt: 2,
-                  mb: 0,
-                  gap: 1,
-                  flex: 1,
-                  minHeight: 0,
+                  borderRadius: 3,
+                  background: isDark
+                    ? "rgba(40, 40, 50, 0.8)"
+                    : "rgba(255, 255, 255, 0.95)",
+                  boxShadow: isDark
+                    ? "0 4px 20px rgba(0, 0, 0, 0.3)"
+                    : "0 4px 20px rgba(0, 0, 0, 0.1)",
+                  border: `1px solid ${
+                    isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)"
+                  }`,
+                  mb: 3,
                 }}
               >
-                {/* Heading always on top */}
-                <Typography
-                  variant="h6"
-                  fontWeight={700}
-                  sx={{
-                    color: isDark ? "#64b5f6" : "#1976d2",
-                    letterSpacing: 0.5,
-                    textAlign: "center",
-                    fontSize: 18,
-                    mb: 0.5,
-                    width: "100%",
-                    lineHeight: 1.2,
-                    zIndex: 2,
-                  }}
-                >
-                  Imagyn Technologies
-                </Typography>
-                {/* Full-section Logo Image */}
                 <Box
                   sx={{
-                    width: "100%",
-                    flex: 1,
-                    minHeight: 0,
-                    height: "100%",
-                    borderRadius: 2,
-                    overflow: "hidden",
-                    background: "#fff",
-                    border: isDark
-                      ? "1.5px solid #37474f"
-                      : "1.5px solid #e3f2fd",
-                    boxShadow: isDark
-                      ? "0 1px 4px 0 #1976d2"
-                      : "0 1px 4px 0 #90caf9",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mt: 0.5,
+                    p: 2,
+                    background: isDark
+                      ? "linear-gradient(90deg, rgba(25, 118, 210, 0.2) 0%, transparent 100%)"
+                      : "linear-gradient(90deg, rgba(25, 118, 210, 0.1) 0%, transparent 100%)",
                   }}
                 >
-                  <a
-                    href="https://imagyntechnologies.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ width: "100%", height: "100%", display: "block" }}
-                    tabIndex={0}
+                  <Typography
+                    variant="h6"
+                    fontWeight={700}
+                    sx={{
+                      color: isDark ? "#64b5f6" : "#1976d2",
+                      fontSize: "1.1rem",
+                      mb: 0.5,
+                    }}
                   >
-                    <img
-                      src="https://imagyntechnologies.com/images/imagyn-logo.png"
-                      alt="Imagyn Technologies Logo"
+                    .NET Developer Intern
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      mb: 1,
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: isDark ? "#b0bec5" : "#607d8b",
+                        fontWeight: 600,
+                        fontSize: "0.85rem",
+                      }}
+                    >
+                      Imagyn Technologies
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: isDark ? "#b0bec5" : "#607d8b",
+                        fontWeight: 500,
+                        fontSize: "0.8rem",
+                      }}
+                    >
+                      Mar – Jun 2025
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Divider
+                  sx={{
+                    borderColor: isDark
+                      ? "rgba(255,255,255,0.1)"
+                      : "rgba(0,0,0,0.05)",
+                  }}
+                />
+
+                <Box sx={{ p: 2 }}>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: isDark ? "#e0e0e0" : "#333",
+                      mb: 2,
+                      fontSize: "0.9rem",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    .NET Core development, C# programming, and SQL Server
+                    database.Developed scalable, fullstack web applications
+                    using ASP.NET MVC.
+                  </Typography>
+
+                  <Box
+                    sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}
+                  >
+                    {[".NET Core", "SQL Server", "JavaScript", "Bootstrap"].map(
+                      (tech) => (
+                        <Chip
+                          key={tech}
+                          label={tech}
+                          size="small"
+                          sx={{
+                            fontSize: "0.7rem",
+                            height: 26,
+                            bgcolor: isDark
+                              ? "rgba(255, 255, 255, 0.1)"
+                              : "rgba(25, 118, 210, 0.1)",
+                            color: isDark ? "#80cbc4" : "#1976d2",
+                            fontWeight: 600,
+                            border: `1px solid ${
+                              isDark
+                                ? "rgba(255, 255, 255, 0.15)"
+                                : "rgba(25, 118, 210, 0.2)"
+                            }`,
+                            "&:hover": {
+                              bgcolor: isDark
+                                ? "rgba(255, 255, 255, 0.15)"
+                                : "rgba(25, 118, 210, 0.15)",
+                            },
+                          }}
+                        />
+                      )
+                    )}
+                  </Box>
+
+                  <Divider
+                    sx={{
+                      borderColor: isDark
+                        ? "rgba(255,255,255,0.1)"
+                        : "rgba(0,0,0,0.05)",
+                      my: 1,
+                    }}
+                  />
+
+                  <Typography
+                    variant="subtitle2"
+                    fontWeight={600}
+                    sx={{
+                      color: isDark ? "#64b5f6" : "#1976d2",
+                      textAlign: "center",
+                      mb: 1,
+                    }}
+                  >
+                    Imagyn Technologies
+                  </Typography>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: 100,
+                      borderRadius: 2,
+                      overflow: "hidden",
+                      background: "#fff",
+                      border: `1px solid ${
+                        isDark
+                          ? "rgba(255, 255, 255, 0.1)"
+                          : "rgba(0, 0, 0, 0.05)"
+                      }`,
+                    }}
+                  >
+                    <a
+                      href="https://imagyntechnologies.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={{
                         width: "100%",
                         height: "100%",
-                        objectFit: "contain",
                         display: "block",
-                        background: "#fff",
                       }}
-                    />
-                  </a>
+                    >
+                      <img
+                        src="https://imagyntechnologies.com/images/imagyn-logo.png"
+                        alt="Imagyn Technologies Logo"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "contain",
+                          padding: 12,
+                          background: "#fff",
+                        }}
+                      />
+                    </a>
+                  </Box>
                 </Box>
-              </Box>
-            </Paper>
+              </Card>
+            ) : (
+              // DESKTOP VIEW: Original experience card
+              <Paper
+                elevation={16}
+                sx={{
+                  width: { xs: "100%", md: 600 },
+                  maxWidth: "100%",
+                  borderRadius: 5,
+                  textAlign: "center",
+                  p: { xs: 2, md: 3 },
+                  background: isDark
+                    ? "linear-gradient(120deg, #23272b 80%, #263238 100%)"
+                    : "linear-gradient(120deg, #fafdff 80%, #e3f2fd 100%)",
+                  boxShadow: isDark
+                    ? "0 8px 40px 0 #1976d2bb"
+                    : "0 8px 40px 0 #90caf9bb",
+                  mb: 3,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: 2,
+                  position: "relative",
+                  overflow: "hidden",
+                  border: isDark ? "2px solid #37474f" : "2px solid #e3f2fd",
+                  transition: "transform 0.3s, box-shadow 0.3s",
+                  minHeight: { xs: 260, md: 220 },
+                  "&:hover": {
+                    transform: "translateY(-6px) scale(1.025)",
+                    boxShadow: isDark
+                      ? "0 16px 56px 0 #1976d2ee"
+                      : "0 16px 56px 0 #1976d2aa",
+                  },
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                  <Typography
+                    variant="h6"
+                    fontWeight={700}
+                    sx={{
+                      color: isDark ? "#64b5f6" : "#1976d2",
+                      letterSpacing: 0.5,
+                      mr: 2,
+                      fontSize: 22,
+                    }}
+                  >
+                    .NET Developer Intern
+                  </Typography>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    sx={{
+                      color: isDark ? "#b0bec5" : "#607d8b",
+                      fontWeight: 600,
+                      fontSize: 15,
+                      letterSpacing: 0.2,
+                    }}
+                  >
+                    Imagyn Technologies
+                  </Typography>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    sx={{
+                      ml: 2,
+                      color: isDark ? "#b0bec5" : "#607d8b",
+                      fontWeight: 500,
+                      fontSize: 14,
+                    }}
+                  >
+                    (Mar – Jun 2025)
+                  </Typography>
+                </Box>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: isDark ? "#e0e0e0" : "#333",
+                    mb: 2,
+                    fontSize: 16,
+                    lineHeight: 1.8,
+                    letterSpacing: 0.1,
+                  }}
+                >
+                  .NET Core development, C# programming, and SQL Server
+                  database.
+                  <br />
+                  Developed scalable, fullstack web applications using ASP.NET
+                  MVC.
+                </Typography>
+                <Box
+                  sx={{ display: "flex", flexWrap: "wrap", gap: 1.2, mb: 2 }}
+                >
+                  {[".NET Core", "SQL Server", "JavaScript", "Bootstrap"].map(
+                    (tech) => (
+                      <Box
+                        key={tech}
+                        component="span"
+                        sx={{
+                          display: "inline-block",
+                          px: 1.7,
+                          py: 0.7,
+                          fontSize: 14,
+                          borderRadius: 2,
+                          bgcolor: isDark ? "#263238" : "#e3f2fd",
+                          color: isDark ? "#80cbc4" : "#1976d2",
+                          fontWeight: 600,
+                          letterSpacing: 0.2,
+                          boxShadow: isDark
+                            ? "0 1px 4px 0 #1976d2"
+                            : "0 1px 4px 0 #90caf9",
+                          border: isDark
+                            ? "1px solid #37474f"
+                            : "1px solid #bbdefb",
+                          transition: "box-shadow 0.2s",
+                          "&:hover": {
+                            boxShadow: "0 0 12px 2px #1976d2, 0 0 2px #fff",
+                            background: isDark
+                              ? "rgba(30, 136, 229, 0.18)"
+                              : "rgba(25, 118, 210, 0.08)",
+                          },
+                        }}
+                      >
+                        {tech}
+                      </Box>
+                    )
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    mt: 2,
+                    mb: 0,
+                    gap: 1,
+                    flex: 1,
+                    minHeight: 0,
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    fontWeight={700}
+                    sx={{
+                      color: isDark ? "#64b5f6" : "#1976d2",
+                      letterSpacing: 0.5,
+                      textAlign: "center",
+                      fontSize: 18,
+                      mb: 0.5,
+                      width: "100%",
+                      lineHeight: 1.2,
+                      zIndex: 2,
+                    }}
+                  >
+                    Imagyn Technologies
+                  </Typography>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      flex: 1,
+                      minHeight: 0,
+                      height: "100%",
+                      borderRadius: 2,
+                      overflow: "hidden",
+                      background: "#fff",
+                      border: isDark
+                        ? "1.5px solid #37474f"
+                        : "1.5px solid #e3f2fd",
+                      boxShadow: isDark
+                        ? "0 1px 4px 0 #1976d2"
+                        : "0 1px 4px 0 #90caf9",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      mt: 0.5,
+                    }}
+                  >
+                    <a
+                      href="https://imagyntechnologies.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        display: "block",
+                      }}
+                      tabIndex={0}
+                    >
+                      <img
+                        src="https://imagyntechnologies.com/images/imagyn-logo.png"
+                        alt="Imagyn Technologies Logo"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "contain",
+                          display: "block",
+                          background: "#fff",
+                        }}
+                      />
+                    </a>
+                  </Box>
+                </Box>
+              </Paper>
+            )}
           </Box>
+
           {/* Right: Skills */}
           <Box
             sx={{
@@ -472,124 +671,156 @@ const SkillsSection: React.FC = () => {
             >
               Skills & Tech Stack
             </Typography>
-            {/* MOBILE VIEW: Custom compact cards */}
+
+            {/* Mobile Skills Cards (unchanged from your previous version) */}
             {isMobile ? (
-              <Stack spacing={2} sx={{ width: "100%" }}>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "grid",
+                  gap: 2,
+                  gridTemplateColumns: "1fr",
+                }}
+              >
                 {skills.map((skill) => (
-                  <Box key={skill.category} sx={{ width: "100%" }}>
-                    {/* Heading above card, centered */}
-                    <Typography
-                      variant="subtitle2"
-                      fontWeight={700}
-                      sx={{
-                        color: isDark ? "#90caf9" : "#1976d2",
-                        fontSize: 15,
-                        letterSpacing: 0.2,
-                        mb: 0.5,
-                        textAlign: "center",
-                        width: "100%",
-                      }}
-                    >
-                      {skill.category}
-                    </Typography>
-                    <Card
-                      elevation={0}
+                  <Card
+                    key={skill.category}
+                    elevation={0}
+                    sx={{
+                      borderRadius: 3,
+                      background: isDark
+                        ? "rgba(30, 30, 40, 0.7)"
+                        : "rgba(255, 255, 255, 0.9)",
+                      boxShadow: isDark
+                        ? "0 4px 20px rgba(0, 0, 0, 0.25)"
+                        : "0 4px 20px rgba(0, 0, 0, 0.08)",
+                      border: `1px solid ${
+                        isDark
+                          ? "rgba(255, 255, 255, 0.1)"
+                          : "rgba(0, 0, 0, 0.05)"
+                      }`,
+                      overflow: "hidden",
+                      transition: "transform 0.3s, box-shadow 0.3s",
+                      "&:hover": {
+                        transform: "translateY(-2px)",
+                        boxShadow: isDark
+                          ? "0 6px 24px rgba(0, 0, 0, 0.35)"
+                          : "0 6px 24px rgba(0, 0, 0, 0.12)",
+                      },
+                    }}
+                  >
+                    <Box
                       sx={{
                         display: "flex",
-                        alignItems: "stretch",
-                        borderRadius: 3,
-                        px: 0,
-                        py: 0,
-                        background: isDark ? "#23272b" : "#f7fafd",
-                        boxShadow: isDark
-                          ? "0 1px 6px 0 #1976d2aa"
-                          : "0 1px 6px 0 #90caf9aa",
-                        border: `1.5px solid ${isDark ? "#37474f" : "#e3f2fd"}`,
-                        minHeight: 48,
+                        alignItems: "center",
+                        p: 2,
+                        background: isDark
+                          ? "linear-gradient(90deg, rgba(25, 118, 210, 0.15) 0%, transparent 100%)"
+                          : "linear-gradient(90deg, rgba(25, 118, 210, 0.08) 0%, transparent 100%)",
+                        borderBottom: `1px solid ${
+                          isDark
+                            ? "rgba(255, 255, 255, 0.05)"
+                            : "rgba(0, 0, 0, 0.03)"
+                        }`,
                       }}
                     >
-                      {/* Icon header on the left */}
-                      <Box
+                      {React.cloneElement(skill.icon, {
+                        sx: {
+                          fontSize: 24,
+                          mr: 2,
+                          color:
+                            skill.category === "Frontend"
+                              ? "#1976d2"
+                              : skill.category === "Backend"
+                              ? "#388e3c"
+                              : skill.category === "Database"
+                              ? "#f57c00"
+                              : skill.category === "Programming Languages"
+                              ? "#d32f2f"
+                              : "#0288d1",
+                        },
+                      })}
+                      <Typography
+                        variant="subtitle1"
+                        fontWeight={600}
                         sx={{
-                          minWidth: 44,
-                          maxWidth: 44,
-                          background: isDark ? "#263238" : "#e3f2fd",
-                          borderTopLeftRadius: 12,
-                          borderBottomLeftRadius: 12,
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          py: 1,
-                          px: 0.5,
-                          borderRight: `1.5px solid ${
-                            isDark ? "#37474f" : "#bbdefb"
-                          }`,
+                          color: isDark ? "#fff" : "#1976d2",
+                          fontSize: "1rem",
+                          letterSpacing: "0.5px",
                         }}
                       >
-                        {/* Give the icon the same color as in desktop view */}
-                        {React.cloneElement(skill.icon, {
-                          fontSize: "small",
-                          sx: {
-                            fontSize: 22,
-                            color:
-                              skill.category === "Frontend"
-                                ? "#1976d2"
-                                : skill.category === "Backend"
-                                ? "#388e3c"
-                                : skill.category === "Database"
-                                ? "#f57c00"
-                                : skill.category === "Programming Languages"
-                                ? "#d32f2f"
-                                : skill.category === "Tools"
-                                ? "#0288d1"
-                                : undefined,
-                          },
-                        })}
-                      </Box>
-                      {/* Skills chips */}
-                      <Box
-                        sx={{
-                          flex: 1,
-                          display: "flex",
-                          flexWrap: "wrap",
-                          gap: 0.5,
-                          alignItems: "center",
-                          justifyContent: "center",
-                          px: 1,
-                          py: 1,
-                        }}
-                      >
-                        {skill.items.map((item) => (
-                          <Chip
-                            key={item.name}
-                            icon={
-                              React.isValidElement(item.icon)
-                                ? React.cloneElement(item.icon, {
-                                    sx: { fontSize: 14, width: 16, height: 16 },
-                                  })
-                                : item.icon
-                            }
-                            label={item.name}
-                            size="small"
-                            sx={{
-                              fontSize: 10.5,
-                              px: 0.5,
-                              bgcolor: isDark ? "#263238" : "#e3f2fd",
-                              color: isDark ? "#fff" : "#1976d2",
-                              fontWeight: 500,
-                              mb: 0.5,
-                              height: 22,
-                            }}
-                          />
-                        ))}
-                      </Box>
-                    </Card>
-                  </Box>
+                        {skill.category}
+                      </Typography>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        p: 2,
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 1.5,
+                        alignItems: "center",
+                      }}
+                    >
+                      {skill.items.map((item) => (
+                        <Chip
+                          key={item.name}
+                          icon={
+                            React.isValidElement(item.icon)
+                              ? React.cloneElement(item.icon, {
+                                  sx: {
+                                    fontSize: 18,
+                                    width: 18,
+                                    height: 18,
+                                    ml: 0.5,
+                                  },
+                                })
+                              : item.icon
+                          }
+                          label={
+                            <Typography
+                              variant="body2"
+                              sx={{
+                                fontWeight: 500,
+                                fontSize: "0.75rem",
+                                ml: 0.5,
+                              }}
+                            >
+                              {item.name}
+                            </Typography>
+                          }
+                          size="medium"
+                          sx={{
+                            height: 32,
+                            borderRadius: 2,
+                            bgcolor: isDark
+                              ? "rgba(255, 255, 255, 0.08)"
+                              : "rgba(25, 118, 210, 0.08)",
+                            border: `1px solid ${
+                              isDark
+                                ? "rgba(255, 255, 255, 0.1)"
+                                : "rgba(25, 118, 210, 0.15)"
+                            }`,
+                            "& .MuiChip-icon": {
+                              ml: "4px !important",
+                              mr: -0.5,
+                            },
+                            transition: "all 0.2s",
+                            "&:hover": {
+                              bgcolor: isDark
+                                ? "rgba(255, 255, 255, 0.15)"
+                                : "rgba(25, 118, 210, 0.15)",
+                              transform: "scale(1.05)",
+                            },
+                          }}
+                        />
+                      ))}
+                    </Box>
+                  </Card>
                 ))}
-              </Stack>
+              </Box>
             ) : (
-              // DESKTOP VIEW: Original design
+              // DESKTOP VIEW: Original skills design
               <Box
                 sx={{
                   display: "flex",
@@ -626,7 +857,6 @@ const SkillsSection: React.FC = () => {
                         "box-shadow 0.3s, width 0.3s, min-height 0.3s, padding 0.3s",
                     }}
                   >
-                    {/* Skill Icon */}
                     <Box
                       sx={{
                         display: "flex",
@@ -637,7 +867,6 @@ const SkillsSection: React.FC = () => {
                     >
                       {skill.icon}
                     </Box>
-                    {/* Category Text */}
                     <Typography
                       variant="subtitle1"
                       fontWeight={700}
@@ -652,7 +881,6 @@ const SkillsSection: React.FC = () => {
                     >
                       {skill.category}
                     </Typography>
-                    {/* Drawer slides out to the right */}
                     <Box
                       className="drawer"
                       sx={{
@@ -662,7 +890,6 @@ const SkillsSection: React.FC = () => {
                         bottom: idx === skills.length - 1 ? 0 : "auto",
                         left: "100%",
                         width: 200,
-                        // Remove background color so only skills are visible
                         background: "none",
                         borderRadius: "12px",
                         boxShadow: 3,
