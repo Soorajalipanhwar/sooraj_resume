@@ -15,16 +15,6 @@ const skills = [
         icon: <JavascriptIcon sx={{ color: "#f7df1e" }} />,
       },
       {
-        name: "C#",
-        icon: (
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png"
-            alt="C#"
-            width="24"
-          />
-        ),
-      },
-      {
         name: "React",
         icon: (
           <img
@@ -71,26 +61,6 @@ const skills = [
         ),
       },
       {
-        name: "Node.js",
-        icon: (
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg"
-            alt="Node.js"
-            width="24"
-          />
-        ),
-      },
-      {
-        name: "Express",
-        icon: (
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png"
-            alt="Express"
-            width="24"
-          />
-        ),
-      },
-      {
         name: "PHP",
         icon: (
           <img
@@ -112,16 +82,6 @@ const skills = [
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png"
             alt="SQL Server"
-            width="24"
-          />
-        ),
-      },
-      {
-        name: "MongoDB",
-        icon: (
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg"
-            alt="MongoDB"
             width="24"
           />
         ),
@@ -185,16 +145,6 @@ const skills = [
       {
         name: "GitHub",
         icon: <GitHubIcon sx={{ color: "#f05032" }} />,
-      },
-      {
-        name: "Webpack",
-        icon: (
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/9/94/Webpack.svg"
-            alt="Webpack"
-            width="24"
-          />
-        ),
       },
       {
         name: "Vite",
