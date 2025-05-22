@@ -1,25 +1,32 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Box, Typography, Paper, useTheme, Fade } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Paper,
+  useTheme,
+  Fade,
+  useMediaQuery,
+} from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import SkillsSection from "./SkillsSection";
 
 const educationData = [
   {
-    icon: <SchoolIcon color="primary" fontSize="small" />, // School icon
+    icon: <SchoolIcon color="primary" fontSize="small" />,
     label: "Matriculation",
     institution: "Govt. (Boys) High School, Badah, Larkana",
     year: "2012-2017",
     details: "Science Group",
   },
   {
-    icon: <SchoolIcon color="primary" fontSize="small" />, // College icon
+    icon: <SchoolIcon color="primary" fontSize="small" />,
     label: "Intermediate",
     institution: "Govt.(Boys) Higher Secondary School Badah, Larkana",
     year: "2017-2019",
     details: "Pre-Engineering",
   },
   {
-    icon: <SchoolIcon color="primary" fontSize="small" />, // University icon
+    icon: <SchoolIcon color="primary" fontSize="small" />,
     label: "BS Computer Science",
     institution:
       "Quaid-E-Awam University of Engineering Science and Technology, Nawabshah",
@@ -28,7 +35,6 @@ const educationData = [
   },
 ];
 
-// Update your certificates array to include timePeriod and duration
 const certificates = [
   {
     title: "Google Professional IT Support",
@@ -45,7 +51,7 @@ const certificates = [
     duration: "3 months",
   },
   {
-    title: "SQL - Intermediate",
+    title: "SQL - Intermediate certificate",
     image: "https://soorajalipanhwar.github.io/My-Website/assets/SQL.jpg",
     link: "https://www.sololearn.com/en/certificates/CC-O4DKUYQ1",
     timePeriod: "2025",
@@ -61,10 +67,11 @@ const certificates = [
   },
 ];
 
-const ITEM_HEIGHT = 100;
+const ITEM_HEIGHT = 80;
 
 const About: React.FC = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isDark = theme.palette.mode === "dark";
   const [visible, setVisible] = useState(false);
   const [visibleItems, setVisibleItems] = useState(
@@ -97,10 +104,8 @@ const About: React.FC = () => {
       observers.push(observer);
     });
     return () => observers.forEach((o) => o.disconnect());
-    // eslint-disable-next-line
   }, [visibleItems]);
 
-  // Certificate click handler
   const handleCertClick = (link: string) => {
     window.open(link, "_blank", "noopener,noreferrer");
   };
@@ -146,9 +151,13 @@ const About: React.FC = () => {
                 justifyContent: "space-between",
                 transition:
                   "box-shadow 0.4s cubic-bezier(.4,0,.2,1), background 0.4s cubic-bezier(.4,0,.2,1)",
-                "&:hover": {
-                  boxShadow: "0 12px 48px 0 #1976d2aa",
-                },
+                ...(isMobile
+                  ? {}
+                  : {
+                      "&:hover": {
+                        boxShadow: "0 12px 48px 0 #1976d2aa",
+                      },
+                    }),
               }}
             >
               {/* Left Column: Timeline */}
@@ -169,14 +178,14 @@ const About: React.FC = () => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    mb: 2,
+                    mb: isMobile ? 1 : 2,
                   }}
                 >
                   <SchoolIcon
                     color="primary"
                     sx={{
-                      fontSize: 48,
-                      mb: 1,
+                      fontSize: isMobile ? 36 : 48,
+                      mb: isMobile ? 0.5 : 1,
                     }}
                   />
                   <Typography
@@ -185,7 +194,7 @@ const About: React.FC = () => {
                     sx={{
                       color: isDark ? "#fff" : "#111",
                       fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
-                      fontSize: { xs: 20, sm: 22 },
+                      fontSize: isMobile ? 18 : { xs: 20, sm: 22 },
                       letterSpacing: 0.5,
                       mb: 1,
                       textTransform: "uppercase",
@@ -211,9 +220,9 @@ const About: React.FC = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      left: { xs: 20, md: 20 },
+                      left: { xs: 16, md: 20 },
                       top: 0,
-                      width: 4,
+                      width: 3,
                       height: `calc(100% - 40px)`,
                       bgcolor: theme.palette.primary.light,
                       opacity: 0.2,
@@ -228,17 +237,14 @@ const About: React.FC = () => {
                         }}
                         style={{
                           position: "relative",
-                          minHeight:
-                            typeof ITEM_HEIGHT === "number"
-                              ? ITEM_HEIGHT
-                              : undefined,
+                          minHeight: isMobile ? 70 : ITEM_HEIGHT,
                           display: "flex",
                           alignItems: "flex-start",
                           marginBottom:
                             idx === educationData.length - 1
                               ? 0
-                              : window.innerWidth < 900
-                              ? 40
+                              : isMobile
+                              ? 30
                               : 20,
                         }}
                       >
@@ -246,13 +252,13 @@ const About: React.FC = () => {
                         <Box
                           sx={{
                             position: "absolute",
-                            left: { xs: 8, md: 8 },
-                            top: 40,
-                            width: 24,
-                            height: 24,
+                            left: { xs: 6, md: 8 },
+                            top: isMobile ? 28 : 40,
+                            width: isMobile ? 20 : 24,
+                            height: isMobile ? 20 : 24,
                             borderRadius: "50%",
                             bgcolor: "#fff",
-                            border: `4px solid ${theme.palette.primary.main}`,
+                            border: `3px solid ${theme.palette.primary.main}`,
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -265,7 +271,7 @@ const About: React.FC = () => {
                         {/* Card Content */}
                         <Box
                           sx={{
-                            ml: { xs: 8, md: 8 },
+                            ml: { xs: 6, md: 8 },
                             flex: 1,
                             background: isDark
                               ? "rgba(30, 30, 40, 0.92)"
@@ -274,19 +280,23 @@ const About: React.FC = () => {
                             boxShadow: isDark
                               ? "0 2px 8px 0 rgba(25, 118, 210, 0.10)"
                               : "0 2px 8px 0 rgba(33, 150, 243, 0.07)",
-                            p: 2,
+                            p: isMobile ? 1.5 : 2,
                             display: "flex",
                             alignItems: "center",
-                            minHeight: 100,
+                            minHeight: isMobile ? 80 : 100,
                             cursor: "pointer",
                             transition:
                               "box-shadow 0.4s cubic-bezier(.4,0,.2,1), background 0.3s,",
-                            "&:hover": {
-                              boxShadow: "0 8px 32px 0 #1976d2aa",
-                              background: isDark
-                                ? "rgba(30, 30, 60, 0.97)"
-                                : "rgba(255, 255, 255, 0.98)",
-                            },
+                            ...(isMobile
+                              ? {}
+                              : {
+                                  "&:hover": {
+                                    boxShadow: "0 8px 32px 0 #1976d2aa",
+                                    background: isDark
+                                      ? "rgba(30, 30, 60, 0.97)"
+                                      : "rgba(255, 255, 255, 0.98)",
+                                  },
+                                }),
                           }}
                         >
                           <Box
@@ -294,7 +304,11 @@ const About: React.FC = () => {
                               textAlign: { xs: "justify", md: "left" },
                             }}
                           >
-                            <Typography variant="h6" fontWeight={700}>
+                            <Typography
+                              variant="h6"
+                              fontWeight={700}
+                              fontSize={isMobile ? "1rem" : undefined}
+                            >
                               {item.label}
                             </Typography>
                             <Typography
@@ -302,10 +316,15 @@ const About: React.FC = () => {
                               color="text.secondary"
                               fontWeight={700}
                               gutterBottom
+                              fontSize={isMobile ? "0.75rem" : undefined}
                             >
                               {item.year} — {item.institution}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography
+                              variant="body2"
+                              color="text.secondary"
+                              fontSize={isMobile ? "0.75rem" : undefined}
+                            >
                               {item.details}
                             </Typography>
                           </Box>
@@ -326,8 +345,9 @@ const About: React.FC = () => {
                   justifyContent: "flex-start",
                   gap: 2,
                   minWidth: 220,
-                  maxWidth: 300,
+                  maxWidth: isMobile ? "100%" : 300,
                   mt: { xs: 2, md: 0 },
+                  pl: isMobile ? 0 : undefined,
                 }}
               >
                 <Typography
@@ -336,7 +356,7 @@ const About: React.FC = () => {
                   sx={{
                     color: isDark ? "#fff" : "#111",
                     fontFamily: "'Montserrat', 'Roboto', Arial, sans-serif",
-                    fontSize: { xs: 20, sm: 22 },
+                    fontSize: isMobile ? 18 : { xs: 20, sm: 22 },
                     letterSpacing: 0.5,
                     mb: 1,
                     textTransform: "uppercase",
@@ -349,20 +369,20 @@ const About: React.FC = () => {
                   sx={{
                     width: "100%",
                     position: "relative",
-                    pl: 3,
+                    pl: isMobile ? 2 : 3,
                     pr: 1,
                     display: "flex",
                     flexDirection: "column",
-                    gap: 3,
+                    gap: isMobile ? 2 : 3,
                   }}
                 >
                   {/* Timeline vertical line */}
                   <Box
                     sx={{
                       position: "absolute",
-                      left: 18,
+                      left: isMobile ? 13 : 18,
                       top: 0,
-                      width: 3,
+                      width: 2,
                       height: "100%",
                       bgcolor: theme.palette.primary.light,
                       opacity: 0.18,
@@ -383,27 +403,27 @@ const About: React.FC = () => {
                       {/* Timeline Dot */}
                       <Box
                         sx={{
-                          width: 18,
-                          height: 18,
+                          width: isMobile ? 14 : 18,
+                          height: isMobile ? 14 : 18,
                           borderRadius: "50%",
                           bgcolor: theme.palette.primary.main,
-                          border: "2.5px solid #fff",
+                          border: "2px solid #fff",
                           boxShadow: 2,
                           position: "absolute",
-                          left: -9,
-                          top: 8,
+                          left: isMobile ? -7 : -9,
+                          top: isMobile ? 6 : 8,
                           zIndex: 2,
                         }}
                       />
                       {/* Time period label */}
                       <Box
                         sx={{
-                          minWidth: 60,
-                          mr: 1.5,
-                          mt: 0.5,
+                          minWidth: isMobile ? 50 : 60,
+                          mr: isMobile ? 1 : 1.5,
+                          mt: isMobile ? 0 : 0.5,
                           textAlign: "right",
                           color: theme.palette.text.secondary,
-                          fontSize: 12,
+                          fontSize: isMobile ? 11 : 12,
                           fontWeight: 500,
                           letterSpacing: 0.2,
                           userSelect: "none",
@@ -412,7 +432,7 @@ const About: React.FC = () => {
                         <Box>{cert.timePeriod}</Box>
                         <Box
                           sx={{
-                            fontSize: 11,
+                            fontSize: isMobile ? 10 : 11,
                             color: theme.palette.primary.main,
                           }}
                         >
@@ -425,6 +445,7 @@ const About: React.FC = () => {
                         isDark={isDark}
                         theme={theme}
                         onClick={() => handleCertClick(cert.link)}
+                        isMobile={isMobile}
                       />
                     </Box>
                   ))}
@@ -446,6 +467,7 @@ const CertificateCard = ({
   isDark,
   theme,
   onClick,
+  isMobile,
 }: {
   cert: {
     title: string;
@@ -457,6 +479,7 @@ const CertificateCard = ({
   isDark: boolean;
   theme: any;
   onClick: () => void;
+  isMobile: boolean;
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -464,10 +487,10 @@ const CertificateCard = ({
     <Paper
       elevation={2}
       onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => !isMobile && setHovered(true)}
+      onMouseLeave={() => !isMobile && setHovered(false)}
       sx={{
-        p: 1,
+        p: isMobile ? 0.8 : 1,
         borderRadius: 2,
         display: "flex",
         flexDirection: "column",
@@ -481,22 +504,26 @@ const CertificateCard = ({
           : "0 1px 4px 0 rgba(33, 150, 243, 0.07)",
         transition: "box-shadow 0.3s, transform 0.3s",
         cursor: "pointer",
-        "&:hover": {
-          boxShadow: "0 4px 16px 0 #1976d2aa",
-          transform: "scale(1.03)",
-          background: isDark
-            ? "rgba(30, 30, 60, 0.97)"
-            : "rgba(230,245,255,0.98)",
-        },
-        maxWidth: 200,
-        minHeight: 48,
+        ...(isMobile
+          ? {}
+          : {
+              "&:hover": {
+                boxShadow: "0 4px 16px 0 #1976d2aa",
+                transform: "scale(1.03)",
+                background: isDark
+                  ? "rgba(30, 30, 60, 0.97)"
+                  : "rgba(230,245,255,0.98)",
+              },
+            }),
+        maxWidth: isMobile ? 180 : 200,
+        minHeight: isMobile ? 40 : 48,
       }}
     >
       <Box
         sx={{
-          mb: 0.5,
-          px: 1.5,
-          py: 0.5,
+          mb: isMobile ? 0 : 0.5,
+          px: isMobile ? 1 : 1.5,
+          py: isMobile ? 0.3 : 0.5,
           borderRadius: 1.5,
           border: `1.5px solid ${theme.palette.primary.main}`,
           background: isDark
@@ -506,7 +533,7 @@ const CertificateCard = ({
             ? theme.palette.primary.light
             : theme.palette.primary.dark,
           fontWeight: 600,
-          fontSize: 14,
+          fontSize: isMobile ? 12 : 14,
           textAlign: "center",
           letterSpacing: 0.2,
           textTransform: "capitalize",
@@ -515,15 +542,15 @@ const CertificateCard = ({
       >
         {cert.title}
       </Box>
-      {hovered && (
+      {(isMobile || hovered) && (
         <Box
           component="img"
           src={cert.image}
           alt={cert.title}
           sx={{
             width: "100%",
-            maxWidth: 140,
-            height: 80,
+            maxWidth: isMobile ? 120 : 140,
+            height: isMobile ? 70 : 80,
             objectFit: "contain",
             borderRadius: 1,
             border: `1.5px solid ${theme.palette.primary.main}`,

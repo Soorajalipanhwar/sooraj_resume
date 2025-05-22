@@ -277,6 +277,51 @@ const CustomCard = ({
           .btn.custom-transparent-btn {
             background: transparent !important;
           }
+            @media (max-width: 768px) {
+  .portfolio-hover-overlay {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: rgba(0, 0, 0, 0.65) !important; /* Slightly more transparent for clearer image */
+    padding: 12px 8px !important;
+    max-width: 100%;
+  }
+
+  .portfolio-card .card-img {
+    transform: none !important;
+    filter: brightness(1.05) contrast(1.1); /* Makes the image crisper */
+  }
+
+  .portfolio-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    transform: none !important;
+    border-radius: 8px;
+  }
+
+  .portfolio-card:hover,
+  .portfolio-card:focus-within {
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    cursor: default;
+  }
+
+  .portfolio-hover-overlay h5 {
+    font-size: 13px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .portfolio-hover-overlay p {
+    font-size: 12px !important;
+    margin-bottom: 6px !important;
+    line-height: 1.4;
+  }
+
+  .portfolio-hover-overlay .btn {
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+    margin-top: 6px;
+  }
+}
+
         `}
         </style>
       </div>

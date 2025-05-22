@@ -102,10 +102,9 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => setVisible(true), 200);
-    setTimeout(() => setTextVisible(true), 600); // Text content animates in after card
+    setTimeout(() => setTextVisible(true), 600);
   }, []);
 
-  // Parallax effect on mouse move
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
@@ -124,27 +123,41 @@ const Home: React.FC = () => {
       <Box
         sx={{
           minHeight: "100vh",
+          maxHeight: { xs: "100vh", md: "auto" },
           width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
-          overflow: "hidden",
-          px: 2,
-          py: { xs: 4, md: 0 },
-          pt: { xs: 8, md: 10 },
+          overflow: { xs: "hidden", md: "visible" },
+          px: { xs: 1, md: 2 },
+          py: { xs: 1, md: 0 },
+          pt: { xs: 3, md: 10 },
           opacity: visible ? 1 : 0,
           transform: visible ? "none" : "translateY(40px)",
           transition:
             "opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)",
-          background: "none", // Remove any background
-          boxShadow: "none", // Remove any box shadow
-          border: "none", // Remove any border
         }}
       >
+        {/* Diagonal split overlay */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 0,
+            pointerEvents: "none",
+            background: `linear-gradient(120deg, transparent 60%, ${
+              isDark ? "#1976d2" : "#1976d2"
+            } 100%)`,
+            opacity: 0.15,
+          }}
+        />
         <Stack
           direction={isMobile ? "column" : "row"}
-          spacing={isMobile ? 6 : 8} // Increased spacing for mobile
+          spacing={isMobile ? 3 : 8} // Reduced spacing for mobile
           alignItems="center"
           justifyContent="center"
           sx={{ width: "100%", zIndex: 1 }}
@@ -152,21 +165,29 @@ const Home: React.FC = () => {
           {/* Image Card */}
           <Card
             ref={cardRef}
-            elevation={0}
+            elevation={10}
             onMouseMove={isMobile ? undefined : handleMouseMove}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={handleMouseLeave}
             sx={{
-              width: { xs: 430, md: 340 },
-              height: { xs: 630, md: 420 },
-              borderRadius: 6,
+              width: { xs: 280, md: 340 }, // smaller width on mobile
+              height: { xs: 400, md: 420 }, // smaller height on mobile
+              borderRadius: 4,
               overflow: "hidden",
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "center",
-              boxShadow: "none", // Remove shadow
-              background: "none", // Remove background
-              mt: isMobile ? 2 : 6,
+              boxShadow: hovered
+                ? `0 16px 48px 0 ${theme.palette.primary.main}55`
+                : isDark
+                ? "0 8px 32px 0 rgba(0,0,0,0.7)"
+                : "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+              background: isDark
+                ? "rgba(30, 30, 40, 0.95)"
+                : "rgba(255,255,255,0.95)",
+              transition:
+                "box-shadow 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1)",
+              mt: isMobile ? 1 : 6,
               cursor: "pointer",
               transform: hovered
                 ? `scale(1.06) rotateX(${
@@ -176,8 +197,6 @@ const Home: React.FC = () => {
               filter: hovered
                 ? "brightness(1.08) saturate(1.2) drop-shadow(0 4px 24px #1976d2aa)"
                 : "none",
-              transition:
-                "box-shadow 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1)",
             }}
           >
             <Box
@@ -207,26 +226,29 @@ const Home: React.FC = () => {
               />
             </Box>
           </Card>
+
           {/* Text Content */}
           <Box
             sx={{
-              maxWidth: { xs: "90%", md: 500 }, // Increased max width for mobile
+              maxWidth: { xs: "90%", md: 500 },
               textAlign: isMobile ? "center" : "left",
               color: isDark ? "#e3f2fd" : "#232526",
               opacity: textVisible ? 1 : 0,
               transform: textVisible ? "none" : "translateY(40px)",
               transition:
                 "opacity 0.8s 0.2s cubic-bezier(.4,0,.2,1), transform 0.8s 0.2s cubic-bezier(.4,0,.2,1)",
+              px: { xs: 1, md: 0 }, // Reduce padding on mobile
             }}
           >
             <Typography
               variant="h2"
               fontWeight={800}
               sx={{
-                mb: 1,
+                mb: 0.8,
                 color: theme.palette.primary.main,
                 letterSpacing: 1,
-                fontSize: { xs: "2.5rem", md: "3rem" }, // Increased font size for mobile
+                fontSize: { xs: "1.8rem", md: "3rem" }, // Smaller on mobile
+                lineHeight: 1.1,
               }}
             >
               Sooraj Ali Panhwar
@@ -235,9 +257,10 @@ const Home: React.FC = () => {
               variant="h5"
               fontWeight={600}
               sx={{
-                mb: 2,
+                mb: 1.5,
                 color: isDark ? "#e3f2fd" : "#1976d2",
-                minHeight: "2.5rem",
+                minHeight: "2rem",
+                fontSize: { xs: "1rem", md: "1.25rem" },
               }}
             >
               <Typewriter />
@@ -245,9 +268,10 @@ const Home: React.FC = () => {
             <Typography
               variant="body1"
               sx={{
-                mb: 3,
+                mb: 2,
                 color: isDark ? "#e3f2fd" : "#263238",
-                fontSize: { xs: "1.15rem", md: "1.15rem" }, // Slightly larger font size for mobile
+                fontSize: { xs: "0.9rem", md: "1.15rem" },
+                lineHeight: 1.3,
               }}
             >
               I am a passionate developer focused on building impactful,
@@ -256,52 +280,72 @@ const Home: React.FC = () => {
             </Typography>
             <Stack
               direction="row"
-              spacing={2}
+              spacing={1.5}
               justifyContent={isMobile ? "center" : "flex-start"}
+              sx={{ flexWrap: "wrap", gap: { xs: 1, md: 2 } }}
             >
+              <IconButton
+                aria-label="GitHub"
+                href="https://github.com/soorajalipanhwar"
+                target="_blank"
+                rel="noopener noreferrer"
+                size="large"
+                sx={{
+                  color: theme.palette.primary.main,
+                  border: `1.5px solid ${theme.palette.primary.main}`,
+                  "&:hover": {
+                    backgroundColor: theme.palette.primary.main,
+                    color: "#fff",
+                  },
+                  width: { xs: 44, md: 50 },
+                  height: { xs: 44, md: 50 },
+                }}
+              >
+                <GitHubIcon fontSize="inherit" />
+              </IconButton>
+
+              <IconButton
+                aria-label="LinkedIn"
+                href="https://www.linkedin.com/in/sooraj-ali-panhwar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                size="large"
+                sx={{
+                  color: theme.palette.primary.main,
+                  border: `1.5px solid ${theme.palette.primary.main}`,
+                  "&:hover": {
+                    backgroundColor: theme.palette.primary.main,
+                    color: "#fff",
+                  },
+                  width: { xs: 44, md: 50 },
+                  height: { xs: 44, md: 50 },
+                }}
+              >
+                <LinkedInIcon fontSize="inherit" />
+              </IconButton>
+
               <Button
-                variant="contained"
-                color="primary"
+                variant="outlined"
                 href={cvUrl}
                 target="_blank"
-                startIcon={<DownloadIcon />}
                 sx={{
-                  fontWeight: 700,
-                  boxShadow: "0 2px 8px 0 rgba(25, 118, 210, 0.10)",
-                  transition:
-                    "box-shadow 0.3s cubic-bezier(.4,0,.2,1), transform 0.3s cubic-bezier(.4,0,.2,1)",
+                  color: theme.palette.primary.main,
+                  borderColor: theme.palette.primary.main,
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  px: { xs: 2, md: 3 },
+                  fontSize: { xs: "0.85rem", md: "1rem" },
+                  height: { xs: 40, md: 48 },
                   "&:hover": {
-                    boxShadow: "0 4px 16px 0 #1976d2aa",
-                    transform: "scale(1.07)",
+                    backgroundColor: theme.palette.primary.main,
+                    color: "#fff",
+                    borderColor: theme.palette.primary.main,
                   },
                 }}
+                startIcon={<DownloadIcon />}
               >
                 Download CV
               </Button>
-              <IconButton
-                color="primary"
-                href="https://github.com/soorajalipanhwar"
-                target="_blank"
-                aria-label="GitHub"
-                sx={{
-                  transition: "transform 0.3s cubic-bezier(.4,0,.2,1)",
-                  "&:hover": { transform: "scale(1.2) rotate(-8deg)" },
-                }}
-              >
-                <GitHubIcon />
-              </IconButton>
-              <IconButton
-                color="primary"
-                href="https://linkedin.com/in/sooraj-ali-panhwar"
-                target="_blank"
-                aria-label="LinkedIn"
-                sx={{
-                  transition: "transform 0.3s cubic-bezier(.4,0,.2,1)",
-                  "&:hover": { transform: "scale(1.2) rotate(8deg)" },
-                }}
-              >
-                <LinkedInIcon />
-              </IconButton>
             </Stack>
           </Box>
         </Stack>
