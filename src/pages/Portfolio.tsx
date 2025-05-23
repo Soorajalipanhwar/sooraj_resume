@@ -60,7 +60,7 @@ const projects = [
     title: "A simple dino game in python",
     description:
       "This is a fun game project in python. It is a basic implementation of google's dino game",
-    technologies: [".NET", "WinForms", "SQL Server"],
+    technologies: ["Python", "Flask", "PyGame"],
     github: "https://github.com/Soorajalipanhwar/dino_game",
     imageUrl:
       "https://github.com/Soorajalipanhwar/dino_game/blob/main/dino%20game.png?raw=true",
