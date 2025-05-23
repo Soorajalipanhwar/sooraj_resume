@@ -8,7 +8,7 @@ const projects = [
       "An OCR-based text recognition app that extracts text from images.",
     technologies: ["Python", "OpenCV", "Tesseract"],
     github: "https://github.com/Soorajalipanhwar/My-Simple-Urdu-OCR-App",
-    imageUrl: "https://soorajalipanhwar.github.io/My-Website/assets/OCR.jpeg",
+    imageUrl: "./OCR.jpeg",
   },
   {
     title: "GameStore Web API",
@@ -17,8 +17,7 @@ const projects = [
     technologies: ["React", "Bootstrap", "Material UI", "axios api"],
     github:
       "https://github.com/Soorajalipanhwar/GameStore_ASP.NET_Core_Web_API",
-    imageUrl:
-      "https://soorajalipanhwar.github.io/My-Website/assets/GameCatelogUI.png",
+    imageUrl: "./GameCatelogUI.png",
   },
   {
     title: "GameStore UI",
@@ -27,8 +26,7 @@ const projects = [
     technologies: [".NET", "ASP.NET Core", "Entity Framwork", "SQL Server"],
     github:
       "https://github.com/Soorajalipanhwar/GameStore_ASP.NET_Core_Web_API",
-    imageUrl:
-      "https://soorajalipanhwar.github.io/My-Website/assets/GameStoreAPI.png",
+    imageUrl: "./GameStoreAPI.png",
   },
   {
     title: "Restaurant Management System",
@@ -36,7 +34,7 @@ const projects = [
       "This is a C# project for restaurant management System with MS SQL Database.",
     technologies: [".NET", "WinForms", "SQL Server"],
     github: "https://github.com/Soorajalipanhwar/Restaurant-Management-System",
-    imageUrl: "https://soorajalipanhwar.github.io/My-Website/assets/RMS.jpeg",
+    imageUrl: "./RMS.jpeg",
   },
   {
     title: "Sentiment Analysis With Python and Flask",
@@ -48,7 +46,7 @@ const projects = [
     github:
       "https://github.com/Soorajalipanhwar/Sentiment-Analysis-App-With-Python-Flask",
     imageUrl:
-      "https://soorajalipanhwar.github.io/My-Website/assets/page%20view.jpg",
+      "https://github.com/Soorajalipanhwar/Sentiment-Analysis-App-With-Python-Flask/blob/main/page%20view.jpg?raw=true",
   },
   {
     title: "Simple Text Editor Application",
@@ -56,8 +54,7 @@ const projects = [
       "This is a simple Text Editor with basic text editing and file handling functionalities.",
     technologies: [".NET", "WinForms", "SQL Server"],
     github: "https://github.com/Soorajalipanhwar/TextEditor",
-    imageUrl:
-      "https://soorajalipanhwar.github.io/My-Website/assets/texteditor.png",
+    imageUrl: "./texteditor.png",
   },
   {
     title: "A simple dino game in python",
@@ -66,7 +63,7 @@ const projects = [
     technologies: [".NET", "WinForms", "SQL Server"],
     github: "https://github.com/Soorajalipanhwar/dino_game",
     imageUrl:
-      "https://soorajalipanhwar.github.io/My-Website/assets/dino%20game.png",
+      "https://github.com/Soorajalipanhwar/dino_game/blob/main/dino%20game.png?raw=true",
   },
 ];
 

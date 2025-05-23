@@ -20,36 +20,64 @@ const ContactSection: React.FC = () => {
     "success"
   );
 
+  // New state management for form data
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const initialFormState = {
+    name: "",
+    email: "",
+    message: "",
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    const dataToSend = {
+      ...formData,
+      access_key: "487151ca-4a8b-4752-8839-04cc80b5fa5d",
+    };
+    const json = JSON.stringify(dataToSend);
 
     try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxdoN8cJz73T3qaps78jTcmNvI8iXLerIaDHZswDh8xtotPNnlN1KFNiKGOOx02w6hg0w/exec",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      }).then((r) => r.json());
 
-      if (response.ok) {
+      if (res.success) {
         setSnackbarMessage("Message sent successfully!");
         setSnackbarSeverity("success");
-        form.reset();
+        setFormData(initialFormState);
       } else {
-        throw new Error("Failed to send message");
+        setSnackbarMessage("Failed: " + res.message);
+        setSnackbarSeverity("error");
       }
-    } catch (error) {
-      console.error("Error!", error);
-      setSnackbarMessage("Failed to send message. Please try again later.");
+    } catch (err) {
+      console.error("Submission error:", err);
+      setSnackbarMessage("Something went wrong. Try again.");
       setSnackbarSeverity("error");
     } finally {
-      setLoading(false);
       setSnackbarOpen(true);
+      setLoading(false);
     }
   };
 
@@ -118,7 +146,6 @@ const ContactSection: React.FC = () => {
       >
         <Box
           component="form"
-          name="submit-to-google-sheet"
           onSubmit={handleSubmit}
           sx={{
             display: "flex",
@@ -140,6 +167,8 @@ const ContactSection: React.FC = () => {
               name="name"
               variant="outlined"
               required
+              value={formData.name}
+              onChange={handleInputChange}
               InputProps={{
                 sx: {
                   color: mode === "dark" ? "#ffffff" : "#333333",
@@ -174,6 +203,8 @@ const ContactSection: React.FC = () => {
               type="email"
               variant="outlined"
               required
+              value={formData.email}
+              onChange={handleInputChange}
               InputProps={{
                 sx: {
                   color: mode === "dark" ? "#ffffff" : "#333333",
@@ -212,6 +243,8 @@ const ContactSection: React.FC = () => {
             rows={5}
             variant="outlined"
             required
+            value={formData.message}
+            onChange={handleInputChange}
             InputProps={{
               sx: {
                 color: mode === "dark" ? "#ffffff" : "#333333",

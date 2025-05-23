@@ -13,8 +13,8 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import DownloadIcon from "@mui/icons-material/Download";
 
-const imageUrl = "../../public/profile.png";
-const cvUrl = "../../public/Soorajs-CV.pdf";
+const imageUrl = "./profile.png";
+const cvUrl = "./Soorajs-CV.pdf";
 
 const TITLES = ["{Software Developer", "<Web Developer", "Software Engineer"];
 
