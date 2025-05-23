@@ -125,7 +125,7 @@ const Home: React.FC = () => {
           maxHeight: { xs: "100vh", md: "auto" },
           width: "100%",
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "center",
           position: "relative",
           overflow: { xs: "hidden", md: "visible" },
@@ -206,7 +206,7 @@ const Home: React.FC = () => {
                   ? "linear-gradient(120deg, #232526 60%, #1976d2 100%)"
                   : "linear-gradient(120deg, #e3f2fd 60%, #1976d2 100%)",
                 display: "flex",
-                alignItems: "flex-end",
+                alignItems: "flex-start",
                 justifyContent: "center",
                 position: "relative",
               }}
@@ -305,7 +305,7 @@ const Home: React.FC = () => {
 
               <IconButton
                 aria-label="LinkedIn"
-                href="https://www.linkedin.com/in/sooraj-ali-panhwar/"
+                href="https://www.linkedin.com/in/sooraj-ali-panhwar-936150224/"
                 target="_blank"
                 rel="noopener noreferrer"
                 size="large"

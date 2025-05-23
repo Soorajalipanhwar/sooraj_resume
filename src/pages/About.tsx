@@ -4,7 +4,7 @@ import {
   Typography,
   Paper,
   useTheme,
-  Fade,
+  Fade, // Fade is used for the main Paper, not the individual items now
   useMediaQuery,
 } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
@@ -38,29 +38,28 @@ const educationData = [
 const certificates = [
   {
     title: "Google Professional IT Support",
-    image: "https://soorajalipanhwar.github.io/My-Website/assets/google IT.png",
+    image: "./GoogleIt.png",
     link: "https://coursera.org/share/311bc49596a4c39df7b840240cb7f2b8",
     timePeriod: "2023",
     duration: "6 months",
   },
   {
-    title: "Data Science with Python",
-    image: "https://soorajalipanhwar.github.io/My-Website/assets/data.png",
+    title: "Data Science & ML Certificate",
+    image: "./data.png",
     link: "https://verifybootcamp.netlify.app/certificate/4320159590089",
     timePeriod: "2023",
     duration: "3 months",
   },
   {
     title: "SQL - Intermediate certificate",
-    image: "https://soorajalipanhwar.github.io/My-Website/assets/SQL.jpg",
+    image: "./SQL.png",
     link: "https://www.sololearn.com/en/certificates/CC-O4DKUYQ1",
     timePeriod: "2025",
     duration: "1 month",
   },
   {
     title: "Problem Solving (HackerRank)",
-    image:
-      "https://soorajalipanhwar.github.io/My-Website/assets/problem%20solving.png",
+    image: "./ProblemSolving.png",
     link: "https://www.hackerrank.com/certificates/92d76f476bc9",
     timePeriod: "2025",
     duration: "2 weeks",
@@ -73,24 +72,36 @@ const About: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isDark = theme.palette.mode === "dark";
+
+  // State for the main Paper component fade-in
   const [visible, setVisible] = useState(false);
-  const [visibleItems, setVisibleItems] = useState(
+
+  // State for education timeline items visibility
+  const [educationVisibleItems, setEducationVisibleItems] = useState(
     Array(educationData.length).fill(false)
   );
-  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const educationItemRefs = useRef<(HTMLLIElement | null)[]>([]);
 
+  // NEW STATE FOR CERTIFICATES VISIBILITY
+  const [certificateVisibleItems, setCertificateVisibleItems] = useState(
+    Array(certificates.length).fill(false)
+  );
+  const certificateItemRefs = useRef<(HTMLDivElement | null)[]>([]); // Use HTMLDivElement for Box components
+
+  // Effect for the main Paper component fade-in on mount
   useEffect(() => {
     setTimeout(() => setVisible(true), 200);
   }, []);
 
+  // Effect for education timeline items Intersection Observer
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
     educationData.forEach((_, idx) => {
-      if (!itemRefs.current[idx]) return;
+      if (!educationItemRefs.current[idx]) return;
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting && !visibleItems[idx]) {
-            setVisibleItems((prev) => {
+          if (entry.isIntersecting && !educationVisibleItems[idx]) {
+            setEducationVisibleItems((prev) => {
               const updated = [...prev];
               updated[idx] = true;
               return updated;
@@ -100,11 +111,35 @@ const About: React.FC = () => {
         },
         { threshold: 0.6 }
       );
-      observer.observe(itemRefs.current[idx]!);
+      observer.observe(educationItemRefs.current[idx]!);
       observers.push(observer);
     });
     return () => observers.forEach((o) => o.disconnect());
-  }, [visibleItems]);
+  }, [educationVisibleItems]);
+
+  // NEW EFFECT FOR CERTIFICATES Intersection Observer
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    certificates.forEach((_, idx) => {
+      if (!certificateItemRefs.current[idx]) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !certificateVisibleItems[idx]) {
+            setCertificateVisibleItems((prev) => {
+              const updated = [...prev];
+              updated[idx] = true;
+              return updated;
+            });
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.4 } // Adjust threshold as needed, e.g., 0.4 means 40% of item is visible
+      );
+      observer.observe(certificateItemRefs.current[idx]!);
+      observers.push(observer);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, [certificateVisibleItems]);
 
   const handleCertClick = (link: string) => {
     window.open(link, "_blank", "noopener,noreferrer");
@@ -230,10 +265,14 @@ const About: React.FC = () => {
                     }}
                   />
                   {educationData.map((item, idx) => (
-                    <Fade in={visibleItems[idx]} timeout={700} key={item.label}>
+                    <Fade
+                      in={educationVisibleItems[idx]}
+                      timeout={700}
+                      key={item.label}
+                    >
                       <li
                         ref={(el) => {
-                          itemRefs.current[idx] = el;
+                          educationItemRefs.current[idx] = el;
                         }}
                         style={{
                           position: "relative",
@@ -390,14 +429,26 @@ const About: React.FC = () => {
                       zIndex: 0,
                     }}
                   />
-                  {certificates.map((cert) => (
+                  {certificates.map((cert, idx) => (
+                    // ADDED REF AND SX FOR APPEAR TRANSITION
                     <Box
                       key={cert.title}
+                      ref={(el: HTMLDivElement | null) => {
+                        certificateItemRefs.current[idx] = el;
+                      }}
                       sx={{
                         display: "flex",
                         alignItems: "flex-start",
                         position: "relative",
                         zIndex: 1,
+                        // Appear Transition styles
+                        opacity: certificateVisibleItems[idx] ? 1 : 0,
+                        transform: certificateVisibleItems[idx]
+                          ? "translateY(0)"
+                          : "translateY(20px)",
+                        transition:
+                          "opacity 0.6s ease-out, transform 0.6s ease-out",
+                        transitionDelay: `${idx * 0.1}s`, // Staggered appearance
                       }}
                     >
                       {/* Timeline Dot */}
@@ -515,7 +566,7 @@ const CertificateCard = ({
                   : "rgba(230,245,255,0.98)",
               },
             }),
-        maxWidth: isMobile ? 180 : 200,
+        maxWidth: isMobile ? 230 : 200,
         minHeight: isMobile ? 40 : 48,
       }}
     >
@@ -549,7 +600,7 @@ const CertificateCard = ({
           alt={cert.title}
           sx={{
             width: "100%",
-            maxWidth: isMobile ? 120 : 140,
+            maxWidth: isMobile ? 200 : 140,
             height: isMobile ? 70 : 80,
             objectFit: "contain",
             borderRadius: 1,

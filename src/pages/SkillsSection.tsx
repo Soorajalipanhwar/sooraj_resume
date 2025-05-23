@@ -765,16 +765,17 @@ const SkillsSection: React.FC = () => {
                         <Chip
                           key={item.name}
                           icon={
-                            React.isValidElement(item.icon)
-                              ? React.cloneElement(item.icon, {
-                                  sx: {
-                                    fontSize: 18,
-                                    width: 18,
-                                    height: 18,
-                                    ml: 0.5,
-                                  },
-                                })
-                              : item.icon
+                            <Box
+                              sx={{
+                                display: "inline-flex",
+                                fontSize: 18,
+                                width: 18,
+                                height: 18,
+                                ml: 0.5,
+                              }}
+                            >
+                              {item.icon}
+                            </Box>
                           }
                           label={
                             <Typography

@@ -1,6 +1,8 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { useTheme } from "@/components/theme-provider";
+// import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@mui/material";
+// import { useTheme } from "@/components/theme-provider";
+import { useTheme } from "@mui/material/styles";
 import "@/components/portfolio/Portfolio.css";
 
 interface CustomCardProps {
@@ -20,7 +22,9 @@ const CustomCard: React.FC<CustomCardProps> = ({
   liveDemo,
   technologies,
 }) => {
-  const { mode } = useTheme();
+  const {
+    palette: { mode },
+  } = useTheme(); // ✅ Correct
 
   return (
     <Card className="portfolio-card shadow-md">
