@@ -481,7 +481,7 @@ const SkillsSection: React.FC = () => {
                       fontSize: 22,
                     }}
                   >
-                    .NET Developer Intern
+                    .NET Developer
                   </Typography>
                   <Typography
                     component="span"
@@ -493,19 +493,7 @@ const SkillsSection: React.FC = () => {
                       letterSpacing: 0.2,
                     }}
                   >
-                    Imagyn Technologies
-                  </Typography>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    sx={{
-                      ml: 2,
-                      color: isDark ? "#b0bec5" : "#607d8b",
-                      fontWeight: 500,
-                      fontSize: 14,
-                    }}
-                  >
-                    (Mar – Jun 2025)
+                    ( Imagyn Technologies)
                   </Typography>
                 </Box>
                 <Typography
