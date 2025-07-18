@@ -14,6 +14,7 @@ import StorageIcon from "@mui/icons-material/Storage";
 import BuildIcon from "@mui/icons-material/Build";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import JavascriptIcon from "@mui/icons-material/Javascript";
+import ExperienceCard from "../components/ExperienceCard";
 
 const skills = [
   {
@@ -252,380 +253,428 @@ const SkillsSection: React.FC = () => {
               Experience
             </Typography>
 
-            {/* ========== MODIFIED EXPERIENCE CARD FOR MOBILE ========== */}
+            {/* ========== MODIFIED EXPERIENCE CARDS FOR MOBILE ========== */}
             {isMobile ? (
-              <Card
-                elevation={0}
+              <Box
                 sx={{
                   width: "100%",
-                  borderRadius: 3,
-                  background: isDark
-                    ? "rgba(40, 40, 50, 0.8)"
-                    : "rgba(255, 255, 255, 0.95)",
-                  boxShadow: isDark
-                    ? "0 4px 20px rgba(0, 0, 0, 0.3)"
-                    : "0 4px 20px rgba(0, 0, 0, 0.1)",
-                  border: `1px solid ${
-                    isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)"
-                  }`,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
                   mb: 3,
                 }}
               >
-                <Box
+                <ExperienceCard
+                  company="Imagyn Technologies"
+                  role=".NET Developer Intern"
+                  description=".NET Core development, C# programming, and SQL Server database. Developed scalable, fullstack web applications using ASP.NET MVC."
+                  logo="https://imagyntechnologies.com/images/imagyn-logo.png"
+                  logoLink="https://imagyntechnologies.com/"
+                  techTags={[
+                    {
+                      name: ".NET Core",
+                      image:
+                        "https://upload.wikimedia.org/wikipedia/commons/e/ee/.NET_Core_Logo.svg",
+                      link: "https://dotnet.microsoft.com/",
+                    },
+                    {
+                      name: "SQL Server",
+                      image:
+                        "https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png",
+                      link: "https://www.microsoft.com/en-us/sql-server",
+                    },
+                    {
+                      name: "JavaScript",
+                      image:
+                        "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+                      link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+                    },
+                    {
+                      name: "Bootstrap",
+                      image:
+                        "https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg",
+                      link: "https://getbootstrap.com/",
+                    },
+                  ]}
+                  isDark={isDark}
+                />
+                <ExperienceCard
+                  company="Synergates Business Solutions"
+                  role="Jr. .NET Developer"
+                  description="Working on enterprise .NET solutions, REST APIs, and business automation. Collaborating with cross-functional teams to deliver robust software for clients."
+                  logo="https://synergates.com/wp-content/uploads/2023/02/Group.png"
+                  logoLink="https://synergates.com/"
+                  techTags={[
+                    {
+                      name: ".NET Core",
+                      image:
+                        "https://upload.wikimedia.org/wikipedia/commons/e/ee/.NET_Core_Logo.svg",
+                      link: "https://dotnet.microsoft.com/",
+                    },
+                    {
+                      name: "REST API",
+                      image:
+                        "https://upload.wikimedia.org/wikipedia/commons/c/cf/RestApi.png",
+                      link: "https://restfulapi.net/",
+                    },
+                    {
+                      name: "SQL Server",
+                      image:
+                        "https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png",
+                      link: "https://www.microsoft.com/en-us/sql-server",
+                    },
+                    {
+                      name: "Azure",
+                      image:
+                        "https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg",
+                      link: "https://azure.microsoft.com/",
+                    },
+                  ]}
+                  isDark={isDark}
+                />
+              </Box>
+            ) : (
+              // DESKTOP VIEW: Two experience cards stacked vertically
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column", // <-- changed from "row" to "column"
+                  gap: 2,
+                  mb: 3,
+                  justifyContent: "center",
+                  alignItems: "stretch",
+                }}
+              >
+                {/* Imagyn Technologies */}
+                <Paper
+                  elevation={16}
                   sx={{
+                    flex: 1,
+                    minWidth: 0,
+                    borderRadius: 4,
+                    textAlign: "center",
                     p: 2,
                     background: isDark
-                      ? "linear-gradient(90deg, rgba(25, 118, 210, 0.2) 0%, transparent 100%)"
-                      : "linear-gradient(90deg, rgba(25, 118, 210, 0.1) 0%, transparent 100%)",
+                      ? "linear-gradient(120deg, #23272b 80%, #263238 100%)"
+                      : "linear-gradient(120deg, #fafdff 80%, #e3f2fd 100%)",
+                    boxShadow: isDark
+                      ? "0 8px 40px 0 #1976d2bb"
+                      : "0 8px 40px 0 #90caf9bb",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "stretch",
+                    gap: 1,
+                    position: "relative",
+                    overflow: "hidden",
+                    border: isDark ? "2px solid #37474f" : "2px solid #e3f2fd",
+                    minHeight: 180,
+                    maxWidth: "100%",
+                    width: "100%",
                   }}
                 >
-                  <Typography
-                    variant="h6"
-                    fontWeight={700}
-                    sx={{
-                      color: isDark ? "#64b5f6" : "#1976d2",
-                      fontSize: "1.1rem",
-                      mb: 0.5,
-                    }}
-                  >
-                    .NET Developer Intern
-                  </Typography>
                   <Box
                     sx={{
                       display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      mb: 1,
-                    }}
-                  >
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: isDark ? "#b0bec5" : "#607d8b",
-                        fontWeight: 600,
-                        fontSize: "0.85rem",
-                      }}
-                    >
-                      Imagyn Technologies
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: isDark ? "#b0bec5" : "#607d8b",
-                        fontWeight: 500,
-                        fontSize: "0.8rem",
-                      }}
-                    >
-                      Mar – Jun 2025
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Divider
-                  sx={{
-                    borderColor: isDark
-                      ? "rgba(255,255,255,0.1)"
-                      : "rgba(0,0,0,0.05)",
-                  }}
-                />
-
-                <Box sx={{ p: 2 }}>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: isDark ? "#e0e0e0" : "#333",
-                      mb: 2,
-                      fontSize: "0.9rem",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    .NET Core development, C# programming, and SQL Server
-                    database.Developed scalable, fullstack web applications
-                    using ASP.NET MVC.
-                  </Typography>
-
-                  <Box
-                    sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}
-                  >
-                    {[".NET Core", "SQL Server", "JavaScript", "Bootstrap"].map(
-                      (tech) => (
-                        <Chip
-                          key={tech}
-                          label={tech}
-                          size="small"
-                          sx={{
-                            fontSize: "0.7rem",
-                            height: 26,
-                            bgcolor: isDark
-                              ? "rgba(255, 255, 255, 0.1)"
-                              : "rgba(25, 118, 210, 0.1)",
-                            color: isDark ? "#80cbc4" : "#1976d2",
-                            fontWeight: 600,
-                            border: `1px solid ${
-                              isDark
-                                ? "rgba(255, 255, 255, 0.15)"
-                                : "rgba(25, 118, 210, 0.2)"
-                            }`,
-                            "&:hover": {
-                              bgcolor: isDark
-                                ? "rgba(255, 255, 255, 0.15)"
-                                : "rgba(25, 118, 210, 0.15)",
-                            },
-                          }}
-                        />
-                      )
-                    )}
-                  </Box>
-
-                  <Divider
-                    sx={{
-                      borderColor: isDark
-                        ? "rgba(255,255,255,0.1)"
-                        : "rgba(0,0,0,0.05)",
-                      my: 1,
-                    }}
-                  />
-
-                  <Typography
-                    variant="subtitle2"
-                    fontWeight={600}
-                    sx={{
-                      color: isDark ? "#64b5f6" : "#1976d2",
-                      textAlign: "center",
-                      mb: 1,
-                    }}
-                  >
-                    Imagyn Technologies
-                  </Typography>
-                  <Box
-                    sx={{
+                      flexDirection: "row",
                       width: "100%",
-                      height: 100,
-                      borderRadius: 2,
-                      overflow: "hidden",
-                      background: "#fff",
-                      border: `1px solid ${
-                        isDark
-                          ? "rgba(255, 255, 255, 0.1)"
-                          : "rgba(0, 0, 0, 0.05)"
-                      }`,
+                      alignItems: "center",
                     }}
                   >
-                    <a
-                      href="https://imagyntechnologies.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "block",
+                    {/* Left: Text */}
+                    <Box
+                      sx={{
+                        flex: 1,
+                        pr: 2,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
                       }}
                     >
-                      <img
-                        src="https://imagyntechnologies.com/images/imagyn-logo.png"
-                        alt="Imagyn Technologies Logo"
+                      <Typography
+                        variant="subtitle1"
+                        fontWeight={700}
+                        sx={{
+                          color: isDark ? "#64b5f6" : "#1976d2",
+                          letterSpacing: 0.5,
+                          fontSize: 16,
+                          mb: 1,
+                        }}
+                      >
+                        Imagyn Technologies
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: isDark ? "#b0bec5" : "#607d8b",
+                          fontWeight: 600,
+                          fontSize: 14,
+                          mb: 1,
+                        }}
+                      >
+                        .NET Developer
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: isDark ? "#e0e0e0" : "#333",
+                          fontSize: 14,
+                          lineHeight: 1.6,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        .NET Core development, C# programming, and SQL Server
+                        database. Developed scalable, fullstack web applications
+                        using ASP.NET MVC.
+                      </Typography>
+                    </Box>
+                    {/* Right: Image */}
+                    <Box
+                      sx={{
+                        width: "50%",
+                        height: 120,
+                        minWidth: 120,
+                        maxWidth: 220,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        background: "#fff",
+                        borderRadius: 2,
+                        border: isDark
+                          ? "1.5px solid #37474f"
+                          : "1.5px solid #e3f2fd",
+                        boxShadow: isDark
+                          ? "0 1px 4px 0 #1976d2"
+                          : "0 1px 4px 0 #90caf9",
+                        ml: 2,
+                      }}
+                    >
+                      <a
+                        href="https://imagyntechnologies.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         style={{
                           width: "100%",
                           height: "100%",
-                          objectFit: "contain",
-                          padding: 12,
-                          background: "#fff",
+                          display: "block",
                         }}
-                      />
-                    </a>
+                        tabIndex={0}
+                      >
+                        <img
+                          src="https://imagyntechnologies.com/images/imagyn-logo.png"
+                          alt="Imagyn Technologies Logo"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "contain",
+                            display: "block",
+                            background: "#fff",
+                          }}
+                        />
+                      </a>
+                    </Box>
                   </Box>
-                </Box>
-              </Card>
-            ) : (
-              // DESKTOP VIEW: Original experience card
-              <Paper
-                elevation={16}
-                sx={{
-                  width: { xs: "100%", md: 600 },
-                  maxWidth: "100%",
-                  borderRadius: 5,
-                  textAlign: "center",
-                  p: { xs: 2, md: 3 },
-                  background: isDark
-                    ? "linear-gradient(120deg, #23272b 80%, #263238 100%)"
-                    : "linear-gradient(120deg, #fafdff 80%, #e3f2fd 100%)",
-                  boxShadow: isDark
-                    ? "0 8px 40px 0 #1976d2bb"
-                    : "0 8px 40px 0 #90caf9bb",
-                  mb: 3,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: 2,
-                  position: "relative",
-                  overflow: "hidden",
-                  border: isDark ? "2px solid #37474f" : "2px solid #e3f2fd",
-                  transition: "transform 0.3s, box-shadow 0.3s",
-                  minHeight: { xs: 260, md: 220 },
-                  "&:hover": {
-                    transform: "translateY(-6px) scale(1.025)",
-                    boxShadow: isDark
-                      ? "0 16px 56px 0 #1976d2ee"
-                      : "0 16px 56px 0 #1976d2aa",
-                  },
-                }}
-              >
-                <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                  <Typography
-                    variant="h6"
-                    fontWeight={700}
+                  {/* Tags row below text and image */}
+                  <Box
                     sx={{
-                      color: isDark ? "#64b5f6" : "#1976d2",
-                      letterSpacing: 0.5,
-                      mr: 2,
-                      fontSize: 22,
+                      width: "100%",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: 1,
+                      mt: 2,
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
                   >
-                    .NET Developer
-                  </Typography>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    sx={{
-                      color: isDark ? "#b0bec5" : "#607d8b",
-                      fontWeight: 600,
-                      fontSize: 15,
-                      letterSpacing: 0.2,
-                    }}
-                  >
-                    ( Imagyn Technologies)
-                  </Typography>
-                </Box>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: isDark ? "#e0e0e0" : "#333",
-                    mb: 2,
-                    fontSize: 16,
-                    lineHeight: 1.8,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  .NET Core development, C# programming, and SQL Server
-                  database.
-                  <br />
-                  Developed scalable, fullstack web applications using ASP.NET
-                  MVC.
-                </Typography>
-                <Box
-                  sx={{ display: "flex", flexWrap: "wrap", gap: 1.2, mb: 2 }}
-                >
-                  {[".NET Core", "SQL Server", "JavaScript", "Bootstrap"].map(
-                    (tech) => (
-                      <Box
+                    {[
+                      ".NET Core",
+                      "SQL Server",
+                      "Identity Framework",
+                      "JavaScript",
+                    ].map((tech) => (
+                      <Chip
                         key={tech}
-                        component="span"
+                        label={tech}
+                        size="small"
                         sx={{
-                          display: "inline-block",
-                          px: 1.7,
-                          py: 0.7,
-                          fontSize: 14,
-                          borderRadius: 2,
+                          fontSize: "0.8rem",
+                          height: 28,
                           bgcolor: isDark ? "#263238" : "#e3f2fd",
                           color: isDark ? "#80cbc4" : "#1976d2",
                           fontWeight: 600,
-                          letterSpacing: 0.2,
-                          boxShadow: isDark
-                            ? "0 1px 4px 0 #1976d2"
-                            : "0 1px 4px 0 #90caf9",
                           border: isDark
                             ? "1px solid #37474f"
                             : "1px solid #bbdefb",
-                          transition: "box-shadow 0.2s",
-                          "&:hover": {
-                            boxShadow: "0 0 12px 2px #1976d2, 0 0 2px #fff",
-                            background: isDark
-                              ? "rgba(30, 136, 229, 0.18)"
-                              : "rgba(25, 118, 210, 0.08)",
-                          },
                         }}
-                      >
-                        {tech}
-                      </Box>
-                    )
-                  )}
-                </Box>
-                <Box
+                      />
+                    ))}
+                  </Box>
+                </Paper>
+                {/* Synergates Business Solutions */}
+                <Paper
+                  elevation={16}
                   sx={{
-                    width: "100%",
+                    flex: 1,
+                    minWidth: 0,
+                    borderRadius: 4,
+                    textAlign: "center",
+                    p: 2,
+                    background: isDark
+                      ? "linear-gradient(120deg, #23272b 80%, #263238 100%)"
+                      : "linear-gradient(120deg, #fafdff 80%, #e3f2fd 100%)",
+                    boxShadow: isDark
+                      ? "0 8px 40px 0 #1976d2bb"
+                      : "0 8px 40px 0 #90caf9bb",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center",
-                    mt: 2,
-                    mb: 0,
+                    alignItems: "stretch",
                     gap: 1,
-                    flex: 1,
-                    minHeight: 0,
+                    position: "relative",
+                    overflow: "hidden",
+                    border: isDark ? "2px solid #37474f" : "2px solid #e3f2fd",
+                    minHeight: 180,
+                    maxWidth: "100%",
+                    width: "100%",
                   }}
                 >
-                  <Typography
-                    variant="h6"
-                    fontWeight={700}
-                    sx={{
-                      color: isDark ? "#64b5f6" : "#1976d2",
-                      letterSpacing: 0.5,
-                      textAlign: "center",
-                      fontSize: 18,
-                      mb: 0.5,
-                      width: "100%",
-                      lineHeight: 1.2,
-                      zIndex: 2,
-                    }}
-                  >
-                    Imagyn Technologies
-                  </Typography>
                   <Box
                     sx={{
-                      width: "100%",
-                      flex: 1,
-                      minHeight: 0,
-                      height: "100%",
-                      borderRadius: 2,
-                      overflow: "hidden",
-                      background: "#fff",
-                      border: isDark
-                        ? "1.5px solid #37474f"
-                        : "1.5px solid #e3f2fd",
-                      boxShadow: isDark
-                        ? "0 1px 4px 0 #1976d2"
-                        : "0 1px 4px 0 #90caf9",
                       display: "flex",
+                      flexDirection: "row",
+                      width: "100%",
                       alignItems: "center",
-                      justifyContent: "center",
-                      mt: 0.5,
                     }}
                   >
-                    <a
-                      href="https://imagyntechnologies.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "block",
+                    {/* Left: Text */}
+                    <Box
+                      sx={{
+                        flex: 1,
+                        pr: 2,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
                       }}
-                      tabIndex={0}
                     >
-                      <img
-                        src="https://imagyntechnologies.com/images/imagyn-logo.png"
-                        alt="Imagyn Technologies Logo"
+                      <Typography
+                        variant="subtitle1"
+                        fontWeight={700}
+                        sx={{
+                          color: isDark ? "#64b5f6" : "#1976d2",
+                          letterSpacing: 0.5,
+                          fontSize: 16,
+                          mb: 1,
+                        }}
+                      >
+                        Synergates Business Solutions
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: isDark ? "#b0bec5" : "#607d8b",
+                          fontWeight: 600,
+                          fontSize: 14,
+                          mb: 1,
+                        }}
+                      >
+                        Jr. .NET Developer
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: isDark ? "#e0e0e0" : "#333",
+                          fontSize: 14,
+                          lineHeight: 1.6,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        Working on enterprise .NET solutions, REST APIs, and
+                        business automation. Collaborating with cross-functional
+                        teams to deliver robust software for clients.
+                      </Typography>
+                    </Box>
+                    {/* Right: Image */}
+                    <Box
+                      sx={{
+                        width: "50%",
+                        height: 120,
+                        minWidth: 120,
+                        maxWidth: 220,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        background: "#fff",
+                        borderRadius: 2,
+                        border: isDark
+                          ? "1.5px solid #37474f"
+                          : "1.5px solid #e3f2fd",
+                        boxShadow: isDark
+                          ? "0 1px 4px 0 #1976d2"
+                          : "0 1px 4px 0 #90caf9",
+                        ml: 2,
+                      }}
+                    >
+                      <a
+                        href="https://synergates.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         style={{
                           width: "100%",
                           height: "100%",
-                          objectFit: "contain",
                           display: "block",
-                          background: "#fff",
+                        }}
+                        tabIndex={0}
+                      >
+                        <img
+                          src="https://synergates.com/wp-content/uploads/2023/02/Group.png"
+                          alt="Synergates Business Solutions Logo"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "contain",
+                            display: "block",
+                            background: "#fff",
+                          }}
+                        />
+                      </a>
+                    </Box>
+                  </Box>
+                  {/* Tags row below text and image */}
+                  <Box
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: 1,
+                      mt: 2,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {[
+                      ".NET Core",
+                      "SQL Server",
+                      "Identity Framework",
+                      "PULSE",
+                    ].map((tech) => (
+                      <Chip
+                        key={tech}
+                        label={tech}
+                        size="small"
+                        sx={{
+                          fontSize: "0.8rem",
+                          height: 28,
+                          bgcolor: isDark ? "#263238" : "#e3f2fd",
+                          color: isDark ? "#80cbc4" : "#1976d2",
+                          fontWeight: 600,
+                          border: isDark
+                            ? "1px solid #37474f"
+                            : "1px solid #bbdefb",
                         }}
                       />
-                    </a>
+                    ))}
                   </Box>
-                </Box>
-              </Paper>
+                </Paper>
+              </Box>
             )}
           </Box>
 
