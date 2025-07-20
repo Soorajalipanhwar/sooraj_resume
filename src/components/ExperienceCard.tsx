@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Box, Typography, Chip, Tooltip, Paper } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Chip,
+  Tooltip,
+  Paper,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 export interface TechTag {
   name: string;
@@ -27,6 +35,8 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
   isDark = false,
 }) => {
   const [imgHover, setImgHover] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Paper
@@ -90,9 +100,9 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: isMobile ? "column" : "row", // Responsive direction
           width: "100%",
-          alignItems: "center",
+          alignItems: isMobile ? "stretch" : "center",
           gap: 2,
         }}
       >
@@ -114,10 +124,10 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
         {/* Logo */}
         <Box
           sx={{
-            width: "50%",
+            width: isMobile ? "100%" : "50%",
             height: 120,
-            minWidth: 120,
-            maxWidth: 220,
+            minWidth: isMobile ? "100px" : "120px",
+            maxWidth: isMobile ? "100%" : "220px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -125,7 +135,8 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
             borderRadius: 2,
             border: isDark ? "1.5px solid #37474f" : "1.5px solid #e3f2fd",
             boxShadow: isDark ? "0 1px 4px 0 #1976d2" : "0 1px 4px 0 #90caf9",
-            ml: 2,
+            ml: isMobile ? 0 : 2,
+            mt: isMobile ? 2 : 0,
             transition: "transform 0.3s, box-shadow 0.3s",
             "&:hover": {
               transform: "scale(1.05)",
