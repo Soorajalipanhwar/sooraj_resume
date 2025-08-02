@@ -14,7 +14,6 @@ import BuildIcon from "@mui/icons-material/Build";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import JavascriptIcon from "@mui/icons-material/Javascript";
 import ExperienceCard from "../components/ExperienceCard";
-import bitbucket from "../assets/bitbucket.jpeg";
 
 const skills = [
   {
