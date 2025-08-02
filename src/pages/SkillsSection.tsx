@@ -14,6 +14,7 @@ import BuildIcon from "@mui/icons-material/Build";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import JavascriptIcon from "@mui/icons-material/Javascript";
 import ExperienceCard from "../components/ExperienceCard";
+import bitbucket from "../assets/bitbucket.jpeg";
 
 const skills = [
   {
@@ -70,11 +71,21 @@ const skills = [
         ),
       },
       {
-        name: "PHP",
+        name: "Swagger",
         icon: (
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg"
-            alt="PHP"
+            src="https://pngate.com/wp-content/uploads/2025/05/swagger-api-logo-green-circle-braces-icon-flat-design-1.png"
+            alt="Swagger"
+            width="24"
+          />
+        ),
+      },
+      {
+        name: "Postman",
+        icon: (
+          <img
+            src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"
+            alt="Postman"
             width="24"
           />
         ),
@@ -152,8 +163,22 @@ const skills = [
     category: "Tools",
     items: [
       {
+        name: "Git",
+        icon: (
+          <img
+            src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png"
+            alt="Git"
+            width="24"
+          />
+        ),
+      },
+      {
         name: "GitHub",
         icon: <GitHubIcon sx={{ color: "#f05032" }} />,
+      },
+      {
+        name: "BitBucket",
+        icon: <img src="./bitbucket.jpeg" alt="BitBucket" width="24" />,
       },
       {
         name: "Vite",
@@ -653,7 +678,7 @@ const SkillsSection: React.FC = () => {
                       ".NET Core",
                       "SQL Server",
                       "Identity Framework",
-                      "PULSE",
+                      "REST APIs",
                     ].map((tech) => (
                       <Chip
                         key={tech}
